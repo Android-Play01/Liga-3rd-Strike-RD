@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Liga 3rd Strike — Ranking</title>
+  <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/Android-Play01/Android-Play01.github.io/main/logo.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Small extra polish */
+    body { background: linear-gradient(180deg,#050507 0%, #0b0b0b 100%); }
+    .glass { background: rgba(17,17,20,0.55); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.03); }
+    .card { border-radius: 1rem; }
+    .chip { background: rgba(255,255,255,0.03); padding: 0.25rem 0.6rem; border-radius: 999px; font-size: 0.75rem; }
+    table td, table th { border-bottom: 1px solid rgba(255,255,255,0.03); }
+    .small-muted { color: #9ca3af; font-size: .85rem }
+    .selected-player-row { border-left: 3px solid #f97316; background-color: rgba(249, 115, 22, 0.1); }
+
+    /* Estilos para los bordes de ranking */
+    .rank-1-border { border-left: 3px solid #FFD700; /* Oro */ }
+    .rank-2-border { border-left: 3px solid #C0C0C0; /* Plata */ }
+    .rank-3-border { border-left: 3px solid #CD7F32; /* Bronce */ }
+
+    /* Custom styles for Top 3 box */
+    .top3-img-container { position: relative; width: 5rem; height: 5rem; }
+    .top3-img { width: 100%; height: 100%; border-radius: 9999px; border: 2px solid rgba(255,255,255,0.1); object-fit: cover; }
+    .top3-name { font-weight: 600; margin-top: 0.5rem; }
+    .top3-games { font-size: 1rem; }
+    .top3-rounds { font-size: 0.85rem; }
+    .rank-1 .top3-img { border-color: #FFD700; }
+    .rank-2 .top3-img { border-color: #C0C0C0; }
+    .rank-3 .top3-img { border-color: #CD7F32; }
+    .top3-player:hover .top3-img { transform: scale(1.1); transition: transform 0.2s ease-in-out; }
+
+    /* Para prevenir el scroll de fondo en los modales */
+    body.modal-open { overflow: hidden; }
+
+    /* Win rate colors */
+    .win-rate-green { color: #22c55e; } /* Esmeralda 500 */
+    .win-rate-yellow { color: #eab308; } /* Amarillo 500 */
+    .win-rate-red { color: #ef4444; } /* Rojo 500 */
+
+    /* Player avatar and rank container */
+    .player-avatar-container { position: relative; width: 40px; height: 40px; }
+    .player-avatar-img { width: 100%; height: 100%; object-fit: cover; border-radius: 1rem; }
+    .rank-badge {
+      position: absolute;
+      bottom: -4px;
+      right: -10px;
+      width: 28px;
+      height: 28px;
+      border-radius: 9999px;
+      padding: 2px;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rank-badge img {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Adjust badge size and position for Top 3 */
+    .top3-img-container .rank-badge {
+      width: 40px;
+      height: 40px;
+      right: -16px;
+      bottom: -4px;
+    }
+    
+    /* Player profile avatar zoom on hover */
+    .player-profile-link:hover .player-avatar-img-zoom { transform: scale(1.1); transition: transform 0.2s ease-in-out; }
+    
+    .profile-avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 1.5rem;
+      object-fit: cover;
+    }
+    .profile-tabs button.active {
+      background-color: rgba(255,255,255,0.05);
+      border-bottom: 2px solid #f97316;
+      font-weight: bold;
+    }
+    .profile-tabs button {
+      border-bottom: 2px solid transparent;
+      padding-bottom: 0.5rem;
+    }
+    
+    /* Hover effects for ranking row */
+    #rankingBody tr:hover {
+        background-color: rgba(249, 115, 22, 0.1);
+    }
+    #rankingBody .profile-link:hover .player-avatar-img-zoom {
+      transform: scale(1.1);
+      transition: transform 0.2s ease-in-out;
+    }
+    #rankingBody .profile-link:hover .player-name-text {
+      color: #f97316;
+      transition: color 0.2s ease-in-out;
+    }
+    #rankingBody .profile-link {
+        display: inline-flex;
+        cursor: pointer;
+    }
+
+    .clickable-profile-opponent {
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+    }
+    .clickable-profile-opponent:hover {
+        background-color: rgba(249, 115, 22, 0.1);
+    }
+    
+    /* ================== INICIO DE LA MEJORA DEL BOTÓN VERSUS ================== */
+    .btn-versus {
+        background-color: #4b5563; /* Gris de fondo */
+        color: #9ca3af;
+        cursor: not-allowed;
+        position: relative;
+        overflow: hidden;
+        transition: color 0.5s ease; /* Transición para el color del texto */
+        border: 1px solid rgba(255,255,255,0.1);
+        z-index: 1; /* Asegura que el contenido del botón esté por encima */
+    }
+
+    /* Pseudo-elemento para el gradiente activo */
+    .btn-versus::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: linear-gradient(90deg, #16a34a 0%, #f97316 100%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        z-index: -1;
+    }
+
+    .btn-versus.is-active {
+        color: white;
+        cursor: pointer;
+    }
+
+    .btn-versus.is-active::after {
+        opacity: 1; /* Hacer visible el gradiente con un fade-in */
+    }
+
+    /* Animación de destello al pasar el cursor (se mantiene) */
+    .btn-versus.is-active::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        transition: all 0.6s ease;
+    }
+
+    .btn-versus.is-active:hover::before {
+        left: 100%;
+    }
+    /* =================== FIN DE LA MEJORA DEL BOTÓN VERSUS =================== */
+
+    .clickable-matchup-row {
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+    }
+    .clickable-matchup-row:hover {
+        background-color: rgba(249, 115, 22, 0.1);
+    }
+    .replay-available {
+        color: #60a5fa; /* blue-400 */
+    }
+    
+    /* ================== INICIO BORDE ANIMADO TOP 3 ================== */
+    .top3-animated-border {
+        position: relative;
+        overflow: hidden;
+        border: 2px solid #f97316; /* Borde naranja fijo */
+        background: #0c0c0f; /* Fondo oscuro sólido como en el ejemplo */
+    }
+    
+    .top3-animated-border::before {
+        content: '';
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        width: 300%;
+        height: 300%;
+        background: conic-gradient(transparent 0%, transparent 35%, rgba(0, 191, 255, 0.8) 45%, rgba(0, 191, 255, 0.8) 55%, transparent 65%, transparent 100%);
+        animation: rotate-light 5s linear infinite;
+        z-index: 1; 
+    }
+
+    /* Contenedor interno para el contenido, para que esté por encima de la animación */
+    .top3-content-wrapper {
+        position: relative;
+        z-index: 2;
+        background: inherit; /* Hereda el fondo oscuro para tapar la luz en el centro */
+        width: calc(100% - 8px); /* Deja un espacio para el borde de luz */
+        height: calc(100% - 8px);
+        margin: 4px; /* Centra el contenido */
+        border-radius: 0.8rem; /* Redondeado interior */
+    }
+
+    @keyframes rotate-light {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    /* =================== FIN BORDE ANIMADO TOP 3 =================== */
+
+    /* ================== INICIO ESTILOS CHECKBOX AZUL ================== */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .container {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      font-size: 18px; /* Tamaño ajustado */
+      user-select: none;
+    }
+
+    .checkmark {
+      position: relative;
+      top: 0;
+      left: 0;
+      height: 1.3em;
+      width: 1.3em;
+      border: 2px solid #414141;
+      border-radius: 5px;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+
+    .container input:hover ~ .checkmark {
+      border: 2px solid #0974f1;
+    }
+
+    .container input:checked ~ .checkmark {
+      box-shadow: 0 0 20px rgba(9, 117, 241, 0.8);
+      border: 2px solid #0974f1;
+    }
+
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    .container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    .container .checkmark:after {
+      left: 0.45em;
+      top: 0.25em;
+      width: 0.25em;
+      height: 0.5em;
+      border: solid white;
+      border-width: 0 0.15em 0.15em 0;
+      transform: rotate(45deg);
+    }
+    /* =================== FIN ESTILOS CHECKBOX AZUL =================== */
+    
+    /* ================== INICIO ESTRELLAS FUGACES ================== */
+    .blub {
+      position: absolute;
+      height: calc(3px * var(--j));
+      width: calc(1px * var(--j));
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(173, 216, 230, 1) 100%
+      );
+      box-shadow:
+        0 0 10px rgba(255, 255, 255, 0.8),
+        0 0 20px rgba(173, 216, 230, 0.6);
+      animation: animated-stars linear infinite reverse;
+      animation-duration: calc(40s / var(--i));
+      rotate: 25deg;
+      opacity: 0.8;
+      filter: blur(calc(0.5px * var(--j)));
+      left: calc(var(--i) * 5%);
+    }
+
+    @keyframes animated-stars {
+      from {
+        transform: translateY(300px) scale(1.2) rotate(25deg);
+      }
+      to {
+        transform: translateY(-50px) scale(0.3) rotate(25deg);
+      }
+    }
+    /* =================== FIN ESTRELLAS FUGACES =================== */
+
+    /* ================== INICIO NUEVAS MEJORAS ================== */
+    .best-matchup, .worst-matchup {
+        font-size: 1.1em;
+        margin-left: 0.5rem;
+    }
+    .history-filter {
+        background-color: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        color: white;
+    }
+    .btn-stats {
+      width: 100%;
+      position: relative;
+      height: 3.5em;
+      border: 3px ridge #149CEA;
+      outline: none;
+      background-color: transparent;
+      color: white;
+      transition: 1s;
+      border-radius: 0.3em;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-stats::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 3%;
+      width: 95%;
+      height: 40%;
+      background-color: #0b0b0b;
+      transition: 0.5s;
+      transform-origin: center;
+    }
+
+    .btn-stats::before {
+      content: "";
+      transform-origin: center;
+      position: absolute;
+      top: 80%;
+      left: 3%;
+      width: 95%;
+      height: 40%;
+      background-color: #0b0b0b;
+      transition: 0.5s;
+    }
+
+    .btn-stats:hover::before, .btn-stats:hover::after {
+      transform: scale(0)
+    }
+
+    .btn-stats:hover {
+      box-shadow: inset 0px 0px 25px #1479EA;
+    }
+    /* =================== FIN NUEVAS MEJORAS =================== */
+  </style>
+</head>
+<body class="min-h-screen text-slate-100 font-sans">
+  <div class="max-w-7xl mx-auto p-6">
+    <header class="flex items-center justify-between mb-6">
+      <div class="flex items-center gap-4">
+        <img src="https://i.postimg.cc/wjp1TmSk/Imagen-de-Whats-App-2025-09-06-a-las-00-10-47-2af5fa89.jpg" alt="Logo Liga 3rd Strike" class="h-12 w-12 rounded-xl object-cover shadow-lg"/>
+        <div>
+          <h1 class="text-2xl font-bold">Liga 3rd Strike — Ranking</h1>
+          <div class="small-muted">Fight A New Rival!</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <input id="search" placeholder="Buscar jugador..." class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-100" />
+      </div>
+    </header>
+
+    <main class="grid lg:grid-cols-3 gap-6">
+      <section class="lg:col-span-2 glass card p-4">
+        <div class="flex items-center justify-between mb-3">
+          <div>
+            <h2 class="text-lg font-semibold">Ranking</h2>
+            <div class="small-muted" id="metaSummary">Cargando...</div>
+          </div>
+          <div class="chip">Temporada 1</div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-slate-400 text-xs">
+              <tr>
+                <th class="px-3 py-2">Pos</th>
+                <th class="px-3 py-2">Jugador</th>
+                <th class="px-3 py-2">Puntos</th>
+                <th class="px-3 py-2">PJ</th>
+                <th class="px-3 py-2">G</th>
+                <th class="px-3 py-2">P</th>
+              </tr>
+            </thead>
+            <tbody id="rankingBody">
+              <tr><td colspan="6" class="px-3 py-6 text-slate-400 text-center">Cargando datos...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <aside class="space-y-4">
+        <div class="glass card p-4">
+          <h3 class="font-semibold">Herramientas</h3>
+          <div class="mt-2 flex flex-col gap-2">
+            <button id="btnVersus" class="btn-versus px-3 py-2 rounded-2xl font-semibold">Versus</button>
+            <button id="btnGlobalStats" class="btn-stats">Estadísticas</button>
+          </div>
+        </div>
+        
+        <div class="glass card p-0 top3-animated-border">
+          <div class="top3-content-wrapper p-4">
+            <h3 class="font-semibold">Top 3 Jugadores</h3>
+            <div id="top3Container" class="flex justify-around items-end mt-3 gap-2 text-center">
+               <div class="text-center w-full small-muted">Cargando...</div>
+            </div>
+            <div id="top3MoreBtnContainer" class="mt-4 text-center">
+            </div>
+          </div>
+        </div>
+
+        <div class="glass card p-4 relative overflow-hidden">
+          <div class="absolute inset-0 z-0">
+             <div style="--i:10;--j:2;" class="blub"></div>
+             <div style="--i:12;--j:1.8;" class="blub"></div>
+             <div style="--i:16;--j:2.2;" class="blub"></div>
+             <div style="--i:9;--j:1.5;" class="blub"></div>
+             <div style="--i:7;--j:1.7;" class="blub"></div>
+             <div style="--i:18;--j:2.5;" class="blub"></div>
+             <div style="--i:20;--j:2;" class="blub"></div>
+             <div style="--i:16;--j:1.9;" class="blub"></div>
+             <div style="--i:21;--j:2.1;" class="blub"></div>
+             <div style="--i:5;--j:1.6;" class="blub"></div>
+          </div>
+          <div class="relative z-10">
+            <h3 class="font-semibold">Esquema de puntuación</h3>
+            <div class="mt-3 text-center small-muted space-y-3">
+              <div>
+                <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
+                <div class="grid grid-cols-3 gap-2">
+                  <div class="p-2 rounded-lg border">
+                    <div>FT3</div>
+                    <div class="font-semibold text-white">0.67</div>
+                  </div>
+                  <div class="p-2 rounded-lg border">
+                    <div>FT5</div>
+                    <div class="font-semibold text-white">0.6</div>
+                  </div>
+                  <div class="p-2 rounded-lg border">
+                    <div>FT10</div>
+                    <div class="font-semibold text-white">0.5</div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="text-sm font-medium text-slate-300 mb-1">Bonificación al Ganador (por Rango)</div>
+                <div class="grid grid-cols-5 gap-2">
+                  <div class="p-2 rounded-lg border"><div>A</div><div class="font-semibold text-white">+2.5</div></div>
+                  <div class="p-2 rounded-lg border"><div>B</div><div class="font-semibold text-white">+2.0</div></div>
+                  <div class="p-2 rounded-lg border"><div>C</div><div class="font-semibold text-white">+1.5</div></div>
+                  <div class="p-2 rounded-lg border"><div>D</div><div class="font-semibold text-white">+1.0</div></div>
+                  <div class="p-2 rounded-lg border"><div>E</div><div class="font-semibold text-white">+0.5</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="mt-3 small-muted text-center text-xs leading-relaxed">
+              <b>Ganador:</b> (Puntos por W ronda) + Bonificación.<br>
+              <b>Perdedor:</b> (Puntos por W ronda).
+            </div>
+          </div>
+        </div>
+      </aside>
+      
+      <section class="lg:col-span-3 mt-6 grid lg:grid-cols-3 gap-6">
+          <div class="glass card p-4 text-center">
+              <h3 class="font-semibold">Top de ligas anteriores</h3>
+              <div class="flex items-center justify-center h-full small-muted">
+                  Coming soon
+              </div>
+          </div>
+          <div class="glass card p-4 text-center">
+              <h3 class="font-semibold">Top de ligas anteriores</h3>
+              <div class="flex items-center justify-center h-full small-muted">
+                  Coming soon
+              </div>
+          </div>
+          <div class="glass card p-4 text-center">
+              <h3 class="font-semibold">Top de ligas anteriores</h3>
+              <div class="flex items-center justify-center h-full small-muted">
+                  Coming soon
+              </div>
+          </div>
+      </section>
+
+      <section class="lg:col-span-3 glass card p-4">
+        <div class="flex justify-between items-center mb-3">
+            <h3 class="font-semibold">Historial de liga actual</h3>
+            <div id="ligaHistoryFilterContainer"></div>
+        </div>
+        <div class="mt-3 overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-slate-400 text-xs">
+              <tr>
+                <th class="px-3 py-2">Fecha</th>
+                <th class="px-3 py-2">FT</th>
+                <th class="px-3 py-2">Jugador 1</th>
+                <th class="px-3 py-2">Jugador 2</th>
+                <th class="px-3 py-2">Marcador</th>
+                <th class="px-3 py-2">Rondas</th>
+                <th class="px-3 py-2">Ganador</th>
+                <th class="px-3 py-2">Puntos</th>
+                <th class="px-3 py-2">Replay</th>
+              </tr>
+            </thead>
+            <tbody id="ligaHistoryBody"></tbody>
+          </table>
+        </div>
+        <div id="ligaMoreBtnContainer" class="mt-4 text-center"></div>
+      </section>
+
+      <section class="lg:col-span-3 glass card p-4">
+        <div class="flex justify-between items-center mb-3">
+            <h3 class="font-semibold">Historial de partidas</h3>
+            <div id="allHistoryFilterContainer"></div>
+        </div>
+        <div class="mt-3 overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-slate-400 text-xs">
+              <tr>
+                <th class="px-3 py-2">Fecha</th>
+                <th class="px-3 py-2">FT</th>
+                <th class="px-3 py-2">Jugador 1</th>
+                <th class="px-3 py-2">Jugador 2</th>
+                <th class="px-3 py-2">Marcador</th>
+                <th class="px-3 py-2">Ganador</th>
+                <th class="px-3 py-2">Puntos</th>
+                <th class="px-3 py-2">Replay</th>
+              </tr>
+            </thead>
+            <tbody id="historyBody"></tbody>
+          </table>
+        </div>
+        <div id="allHistoryMoreBtnContainer" class="mt-4 text-center"></div>
+      </section>
+    </main>
+
+    <footer class="mt-6 small-muted text-center">Prototipo — Street Fighter III: 3rd Strike • Hecho con ❤️</footer>
+  </div>
+
+  <div id="modalRoot"></div>
+
+  <script>
+    const JSON_URL = 'https://raw.githubusercontent.com/Android-Play01/Android-Play01.github.io/main/liga-3rd-strike-2025-09-08.json';
+    
+    let players = [];
+    let ligaMatches = [];
+    let allMatches = [];
+    let selectedPlayers = [];
+    
+    async function loadRemoteDataAndRender() {
+        try {
+            const response = await fetch(`${JSON_URL}?cachebust=${new Date().getTime()}`);
+            if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
+            const data = await response.json();
+            
+            players = data.players || [];
+            allMatches = (data.allMatches || []).sort((a, b) => new Date(a.fechaISO) - new Date(b.fechaISO));
+            ligaMatches = allMatches.filter(m => data.ligaMatches.some(lm => lm.id === m.id)).sort((a, b) => new Date(a.fechaISO) - new Date(b.fechaISO));
+
+            console.log("Datos cargados exitosamente desde GitHub.");
+            renderAll();
+        } catch (error) {
+            console.error("No se pudieron cargar los datos de la liga desde GitHub:", error);
+            rankingBody.innerHTML = `<tr><td colspan="6" class="px-3 py-6 text-red-400 text-center">Error al cargar los datos. Revisa la consola.</td></tr>`;
+        }
+    }
+
+    const RANK_IMAGES = {
+        'S': 'https://i.postimg.cc/RFf2SzMD/rank5.png', 'A': 'https://i.postimg.cc/RFf2SzMD/rank5.png',
+        'B': 'https://i.postimg.cc/4xxCzM5Y/rank4.png', 'C': 'https://i.postimg.cc/BvRdfvGF/rank3.png',
+        'D': 'https://i.postimg.cc/zfy9Qg45/rank2.png', 'E': 'https://i.postimg.cc/nhRyTkR0/rank1.png'
+    };
+    const CHARACTER_IMAGES = {
+        'Akuma': 'https://i.postimg.cc/WpqZ5Lby/akuma.png', 'Alex': 'https://i.postimg.cc/909q0Tn2/alex.png',
+        'Chun-Li': 'https://i.postimg.cc/8P863K7z/chunli.png', 'Dudley': 'https://i.postimg.cc/zB6gqppp/dudley.png',
+        'Elena': 'https://i.postimg.cc/wThmdXNc/elena.png', 'Hugo': 'https://i.postimg.cc/DzzJsRMB/hugo.png',
+        'Ibuki': 'https://i.postimg.cc/8zNrk7B8/ibuki.png', 'Ken': 'https://i.postimg.cc/Hkz8rTBr/ken.png',
+        'Makoto': 'https://i.postimg.cc/GpSBjq0r/makoto.png', 'Necro': 'https://i.postimg.cc/nzjXSBZm/necro.png',
+        'Oro': 'https://i.postimg.cc/sXkvkxDN/oro.png', 'Remy': 'https://i.postimg.cc/ZYN9r8wt/remy.png',
+        'Ryu': 'https://i.postimg.cc/BQGjNjz8/ryu.png', 'Sean': 'https://i.postimg.cc/BQcXzqWm/sean.png',
+        'Twelve': 'https://i.postimg.cc/sgjvdtss/twelve.png', 'Urien': 'https://i.postimg.cc/3wWNWmkq/urien.png',
+        'Yun': 'https://i.postimg.cc/QtTMJDkk/yun.png', 'Yang': 'https://i.postimg.cc/rpbm4sWw/yang.png',
+        'Q': 'https://i.postimg.cc/Bb2X43jQ/q.png',
+    };
+
+    const HISTORY_LIMIT = 7;
+    const PROFILE_LIST_LIMIT = 4;
+    const VERSUS_CHAR_LIMIT = 4;
+    const STREAK_THRESHOLD = 1; 
+
+    function uid(){return Math.random().toString(36).slice(2,9)}
+    function nowISO(){return new Date().toISOString()}
+    function fmtDate(iso){return new Date(iso).toLocaleString()}
+
+    const rankingBody = document.getElementById('rankingBody');
+    const ligaHistoryBody = document.getElementById('ligaHistoryBody');
+    const historyBody = document.getElementById('historyBody');
+    const metaSummary = document.getElementById('metaSummary');
+    const searchInput = document.getElementById('search');
+    const top3Container = document.getElementById('top3Container');
+    const top3MoreBtnContainer = document.getElementById('top3MoreBtnContainer');
+    const ligaMoreBtnContainer = document.getElementById('ligaMoreBtnContainer');
+    const allHistoryMoreBtnContainer = document.getElementById('allHistoryMoreBtnContainer');
+    const ligaHistoryFilterContainer = document.getElementById('ligaHistoryFilterContainer');
+    const allHistoryFilterContainer = document.getElementById('allHistoryFilterContainer');
+
+    function calculateStreak(playerId) {
+        const playerMatches = allMatches.filter(m => m.jugador1Id === playerId || m.jugador2Id === playerId);
+        if (playerMatches.length === 0) return null;
+
+        let currentStreak = 0;
+        let streakType = '';
+        
+        // Iterate backwards from the most recent match
+        for (const match of playerMatches.slice().reverse()) {
+            const isWinner = match.ganadorId === playerId;
+            if (currentStreak === 0) {
+                streakType = isWinner ? 'win' : 'loss';
+                currentStreak = 1;
+            } else if ((isWinner && streakType === 'win') || (!isWinner && streakType === 'loss')) {
+                currentStreak++;
+            } else {
+                break; 
+            }
+        }
+
+        if (currentStreak >= STREAK_THRESHOLD) {
+            return { type: streakType, count: currentStreak };
+        }
+        return null;
+    }
+
+    function calculateLast10Stats(playerId) {
+        const playerMatches = allMatches.filter(m => m.jugador1Id === playerId || m.jugador2Id === playerId).slice(-10);
+        if (playerMatches.length === 0) return null;
+        
+        const wins = playerMatches.filter(m => m.ganadorId === playerId).length;
+        const losses = playerMatches.length - wins;
+        return `${wins}-${losses}`;
+    }
+
+    function renderAll(){
+      const sorted = [...players].sort((a,b)=> (b.puntos - a.puntos) || (b.ganados - a.ganados) || a.nombre.localeCompare(b.nombre));
+      
+      rankingBody.innerHTML = '';
+      if(sorted.length===0){
+        rankingBody.innerHTML = '<tr><td colspan="6" class="px-3 py-6 text-slate-400 text-center">No hay jugadores.</td></tr>'
+      } else {
+        sorted.forEach((p,i)=>{
+          const isSelected = selectedPlayers.includes(p.id);
+          let rankBorderClass = '';
+          if (p.puntos > 0) {
+            if (i === 0) rankBorderClass = 'rank-1-border';
+            else if (i === 1) rankBorderClass = 'rank-2-border';
+            else if (i === 2) rankBorderClass = 'rank-3-border';
+          }
+          
+          const tr = document.createElement('tr');
+          tr.dataset.id = p.id;
+          tr.className = `${isSelected ? 'selected-player-row' : ''} ${rankBorderClass} cursor-pointer`;
+          tr.innerHTML = `<td class="px-3 py-3 font-semibold flex items-center gap-2">
+                            <label class="container pointer-events-none">
+                              <input ${isSelected ? 'checked' : ''} type="checkbox">
+                              <div class="checkmark"></div>
+                            </label>
+                            <span>${i+1}</span>
+                          </td><td class="px-3 py-3"><div class="profile-link flex items-center gap-3"><div class="player-avatar-container"><div class="h-10 w-10 rounded-xl bg-slate-800 flex items-center justify-center player-avatar-img-zoom">${p.avatarUrl? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-xl"/>` : '👤'}</div>${p.rango ? `<div class="rank-badge"><img src="${RANK_IMAGES[p.rango] || ''}" alt="Rank ${p.rango}" /></div>` : ''}</div><div><div class="font-medium text-white player-name-text">${p.nombre}</div></div></div></td><td class="px-3 py-3 font-semibold text-amber-400">${p.puntos.toFixed(2)}</td><td class="px-3 py-3">${p.jugados}</td><td class="px-3 py-3">${p.ganados}</td><td class="px-3 py-3">${p.perdidos}</td>`;
+          rankingBody.appendChild(tr);
+        })
+      }
+      const top3 = sorted.slice(0, 3);
+      top3Container.innerHTML = top3.length > 0 ? top3.map((p, i) => `<div class="top3-player flex flex-col items-center rank-${i+1} cursor-pointer" data-id="${p.id}"><div class="top3-img-container"><div class="top3-img flex items-center justify-center bg-slate-800">${p.avatarUrl ? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-full player-avatar-img-zoom"/>` : '👤'}</div>${p.rango ? `<div class="rank-badge"><img src="${RANK_IMAGES[p.rango] || ''}" alt="Rank ${p.rango}" /></div>` : ''}</div><div class="top3-name">${p.nombre}</div><div class="top3-games">${p.ganados}-${p.perdidos}</div><div class="small-muted top3-rounds">${p.rondasGanadas}-${p.rondasPerdidas}</div></div>`).join('') : '<div class="text-center w-full small-muted">No hay jugadores.</div>';
+      top3MoreBtnContainer.innerHTML = players.length > 0 ? `<button id="showPlayerStatsBtn" class="px-4 py-2 rounded-2xl w-full border border-transparent hover:border-white transition-colors">Ver más</button>` : '';
+
+      renderHistoryTables();
+      
+      metaSummary.textContent = `${players.length} jugadores · ${ligaMatches.length} sets`
+      
+      if(document.getElementById('showPlayerStatsBtn')) {
+        document.getElementById('showPlayerStatsBtn').onclick = showPlayerStatsModal;
+      }
+      document.querySelectorAll('.top3-player').forEach(el => {
+        el.onclick = (e) => showPlayerProfile(e.currentTarget.dataset.id);
+      });
+      updateQuickMatchButtons();
+    }
+    
+    function renderHistoryTables(filterLiga = 'all', filterAll = 'all') {
+        const populateFilter = (container, id, currentValue) => {
+            const playerOptions = players.map(p => `<option value="${p.id}" ${currentValue === p.id ? 'selected' : ''}>${p.nombre}</option>`).join('');
+            container.innerHTML = `<select id="${id}" class="history-filter"><option value="all">Todos los jugadores</option>${playerOptions}</select>`;
+        };
+
+        populateFilter(ligaHistoryFilterContainer, 'ligaFilter', filterLiga);
+        populateFilter(allHistoryFilterContainer, 'allFilter', filterAll);
+        
+        document.getElementById('ligaFilter').onchange = (e) => renderHistoryTables(e.target.value, document.getElementById('allFilter').value);
+        document.getElementById('allFilter').onchange = (e) => renderHistoryTables(document.getElementById('ligaFilter').value, e.target.value);
+        
+        renderHistoryTable(ligaHistoryBody, ligaMoreBtnContainer, [...ligaMatches].reverse(), filterLiga, true);
+        renderHistoryTable(historyBody, allHistoryMoreBtnContainer, [...allMatches].reverse(), filterAll, false);
+    }
+    
+    function renderHistoryTable(tbody, moreBtnContainer, matches, filterPlayerId, isLiga) {
+        tbody.innerHTML = '';
+        moreBtnContainer.innerHTML = '';
+        
+        const filteredMatches = filterPlayerId === 'all' 
+            ? matches 
+            : matches.filter(m => m.jugador1Id === filterPlayerId || m.jugador2Id === filterPlayerId);
+
+        const recentMatches = filteredMatches.slice(0, HISTORY_LIMIT);
+
+        if (recentMatches.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="${isLiga ? 9 : 8}" class="px-3 py-6 text-slate-400 text-center">Sin resultados.</td></tr>`;
+            return;
+        }
+
+        recentMatches.forEach(m => {
+          const j1 = players.find(p => p.id === m.jugador1Id);
+          const j2 = players.find(p => p.id === m.jugador2Id);
+          const g = players.find(p => p.id === m.ganadorId);
+          const tr = document.createElement('tr');
+          const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
+          
+          let columns = `<td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td><td class="px-3 py-2">FT${m.ftType}</td><td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td><td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td><td class="px-3 py-2 font-medium">${m.marcador}</td>`;
+          if (isLiga) {
+              columns += `<td class="px-3 py-2">${m.rondas.j1}-${m.rondas.j2}</td>`;
+          }
+          columns += `<td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td><td class="px-3 py-2">+${m.puntosGanador.toFixed(2)}</td><td class="px-3 py-2 small-muted">${replayLink}</td>`;
+          
+          tr.innerHTML = columns;
+          tbody.appendChild(tr);
+        });
+
+        if (filteredMatches.length > HISTORY_LIMIT) {
+            const btn = document.createElement('button');
+            btn.className = 'px-4 py-2 rounded-2xl border';
+            btn.textContent = 'Mostrar más';
+            btn.onclick = () => showHistoryModal(filteredMatches, isLiga ? 'Historial de liga actual' : 'Historial de partidas');
+            moreBtnContainer.appendChild(btn);
+        }
+    }
+    
+    function getGlobalCharStats() {
+        const usage = {};
+        const wins = {};
+        const losses = {};
+
+        allMatches.forEach(match => {
+            if (match.roundsData) {
+                match.roundsData.forEach(round => {
+                    const p1Char = round.p1Char;
+                    const p2Char = round.p2Char;
+                    if (p1Char) usage[p1Char] = (usage[p1Char] || 0) + 1;
+                    if (p2Char) usage[p2Char] = (usage[p2Char] || 0) + 1;
+
+                    const winnerChar = round.winnerId === match.jugador1Id ? p1Char : p2Char;
+                    const loserChar = round.winnerId === match.jugador1Id ? p2Char : p1Char;
+                    
+                    if (winnerChar) wins[winnerChar] = (wins[winnerChar] || 0) + 1;
+                    if (loserChar) losses[loserChar] = (losses[loserChar] || 0) + 1;
+                });
+            }
+        });
+
+        const winRate = Object.keys(usage).map(char => {
+            const totalGames = (wins[char] || 0) + (losses[char] || 0);
+            return {
+                char,
+                rate: totalGames > 0 ? ((wins[char] || 0) / totalGames) * 100 : 0,
+                games: totalGames
+            };
+        }).filter(c => c.games >= 5); // Minimum 5 games to be considered
+
+        const sortedUsage = Object.entries(usage).sort(([, a], [, b]) => b - a);
+        const sortedWinRate = winRate.sort((a, b) => b.rate - a.rate);
+
+        return { usage: sortedUsage, winRate: sortedWinRate };
+    }
+    
+    function showGlobalCharStatsModal() {
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+        const stats = getGlobalCharStats();
+
+        let usageHTML = stats.usage.map(([char, count]) => `<div class="flex justify-between items-center"><div class="flex items-center gap-2"><img src="${CHARACTER_IMAGES[char]}" class="h-6 w-6 rounded-md"/><span>${char}</span></div><span class="font-semibold">${count} usos</span></div>`).join('');
+        let winRateHTML = stats.winRate.map(({ char, rate }) => `<div class="flex justify-between items-center"><div class="flex items-center gap-2"><img src="${CHARACTER_IMAGES[char]}" class="h-6 w-6 rounded-md"/><span>${char}</span></div><span class="font-semibold ${getWinRateColor(rate)}">${rate.toFixed(1)}%</span></div>`).join('');
+
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div class="relative w-full max-w-2xl max-h-[80vh] glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold mb-4">Estadísticas Globales de Personajes</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-6 overflow-y-auto max-h-[60vh] pr-2"><div><h4 class="font-semibold mb-2 text-center">Más Populares</h4><div class="space-y-1 small-muted">${usageHTML}</div></div><div><h4 class="font-semibold mb-2 text-center">Más Letales (min. 5 usos)</h4><div class="space-y-1 small-muted">${winRateHTML}</div></div></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
+        setTimeout(() => {
+          root.querySelector('.relative').classList.remove('scale-95', 'opacity-0');
+        }, 10);
+    }
+
+    function showHistoryModal(history, title) {
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+        const isLigaHistory = title === 'Historial de liga actual';
+        let tableRows = history.map(m => {
+            const j1 = players.find(p => p.id === m.jugador1Id);
+            const j2 = players.find(p => p.id === m.jugador2Id);
+            const g = players.find(p => p.id === m.ganadorId);
+            const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
+            return `<tr><td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td><td class="px-3 py-2">FT${m.ftType}</td><td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td><td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td><td class="px-3 py-2 font-medium">${m.marcador}</td>${isLigaHistory ? `<td class="px-3 py-2">${m.rondas.j1}-${m.rondas.j2}</td>` : ''}<td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td><td class="px-3 py-2">+${m.puntosGanador.toFixed(2)}</td><td class="px-3 py-2 small-muted">${replayLink}</td></tr>`;
+        }).join('');
+
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="historyModalContent" class="relative w-full max-w-4xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold mb-4">${title}</h3><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="text-slate-400 text-xs"><tr><th class="px-3 py-2">Fecha</th><th class="px-3 py-2">FT</th><th class="px-3 py-2">Jugador 1</th><th class="px-3 py-2">Jugador 2</th><th class="px-3 py-2">Marcador</th>${isLigaHistory ? `<th class="px-3 py-2">Rondas</th>` : ''}<th class="px-3 py-2">Ganador</th><th class="px-3 py-2">Puntos</th><th class="px-3 py-2">Replay</th></tr></thead><tbody>${tableRows}</tbody></table></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
+        setTimeout(() => { document.getElementById('historyModalContent').classList.remove('scale-95', 'opacity-0'); }, 10);
+    }
+
+    function showPlayerStatsModal() {
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+        const sortedPlayers = [...players].sort((a,b)=> (b.puntos - a.puntos) || (b.ganados - a.ganados) || a.nombre.localeCompare(b.nombre));
+        let tableRows = sortedPlayers.map((p, i) => {
+          const totalRondas = p.rondasGanadas + p.rondasPerdidas;
+          const winRateSets = p.jugados > 0 ? (p.ganados / p.jugados) * 100 : 0;
+          const winRateRondas = totalRondas > 0 ? (p.rondasGanadas / totalRondas) * 100 : 0;
+          return `<tr data-id="${p.id}" class="clickable-player-row hover:bg-slate-900 cursor-pointer"><td class="px-3 py-2">${i+1}</td><td class="px-3 py-2">${p.nombre}</td><td class="px-3 py-2">${p.jugados}</td><td class="px-3 py-2">${p.ganados}-${p.perdidos}</td><td class="px-3 py-2">${p.rondasGanadas}-${p.rondasPerdidas}</td><td class="px-3 py-2 font-semibold ${getWinRateColor(winRateSets)}">${winRateSets.toFixed(1)}%</td><td class="px-3 py-2 font-semibold ${getWinRateColor(winRateRondas)}">${winRateRondas.toFixed(1)}%</td></tr>`;
+        }).join('');
+
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="playerStatsModalContent" class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold mb-4">Estadísticas de Jugadores</h3><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="text-slate-400 text-xs"><tr><th class="px-3 py-2">Pos</th><th class="px-3 py-2">Jugador</th><th class="px-3 py-2">PJ</th><th class="px-3 py-2">Sets<br>(G/P)</th><th class="px-3 py-2">Rondas<br>(G/P)</th><th class="px-3 py-2">Sets<br>Win Rate</th><th class="px-3 py-2">Rondas<br>Win Rate</th></tr></thead><tbody>${tableRows}</tbody></table></div><div class="mt-4 text-center small-muted"><div>Clasificación del Win Rate:</div><div class="mt-1 flex items-center justify-center gap-2"><span class="win-rate-green font-semibold">Positivo</span> (100% - 60%) <span class="win-rate-yellow font-semibold">Neutro</span> (59% - 45%) <span class="win-rate-red font-semibold">Negativo</span> (44% - 0%)</div></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
+        setTimeout(() => {
+          document.getElementById('playerStatsModalContent').classList.remove('scale-95', 'opacity-0');
+          document.querySelectorAll('.clickable-player-row').forEach(row => { row.onclick = () => { closeModal(); setTimeout(() => showPlayerProfile(row.dataset.id), 300); }; });
+        }, 10);
+    }
+    
+    function showPlayerProfile(playerId) {
+        document.body.classList.add('modal-open');
+        const player = players.find(p => p.id === playerId);
+        if (!player) return;
+        const statsLiga = getPlayerStats(player.id, ligaMatches);
+        const statsTotal = getPlayerStats(player.id, allMatches);
+        const playerCharacters = getPlayerCharactersUsed(player.id, allMatches);
+        const discordHTML = player.discordUsername ? `<div class="mt-2 flex items-center gap-2 text-slate-300"><img src="https://i.postimg.cc/yN0DgFj7/pngimg-com-discord-PNG7.png" class="w-5 h-5"/><span class="font-semibold">${player.discordUsername}</span></div>` : '';
+        
+        const streak = calculateStreak(playerId);
+        const last10 = calculateLast10Stats(playerId);
+        
+        let extraStatsHTML = '';
+        if ((streak && streak.type === 'win') || last10) {
+            extraStatsHTML = '<div class="mt-2 text-md flex items-center gap-4">';
+            if (streak && streak.type === 'win') {
+                extraStatsHTML += `<div class="text-amber-400"><span class="font-bold">Win Streak (Sets):</span> ${streak.count}</div>`;
+            }
+            if(last10) {
+                extraStatsHTML += `<div class="text-slate-300"><span class="font-bold">Last 10 sets:</span> ${last10}</div>`;
+            }
+            extraStatsHTML += '</div>';
+        }
+        
+        const root = document.getElementById('modalRoot');
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="playerProfileModalContent" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><div class="flex justify-between items-start pb-4 border-b border-slate-700"><div class="flex items-center gap-6"><div class="flex-shrink-0 relative profile-link"><img src="${player.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800 player-avatar-img-zoom" />${player.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[player.rango] || ''}" alt="Rank ${player.rango}" /></div>` : ''}</div><div><div class="text-3xl font-bold profile-link player-name-text">${player.nombre}</div>${discordHTML}<div class="mt-2 text-md"><span class="font-bold">Sets:</span> ${statsTotal.sets.ganados}-${statsTotal.sets.perdidos}<span class="mx-2 small-muted">|</span><span class="font-bold">Rondas:</span> ${statsTotal.rondas.ganadas}-${statsTotal.rondas.perdidas}</div>${extraStatsHTML}</div></div><div id="playerCharactersContainer" class="flex flex-col items-center"><div class="text-xs small-muted">Personajes</div><div class="flex items-center gap-2 mt-2"></div></div></div><div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist"><button id="ligaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de liga actual</button><button id="totalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de partidas totales</button></div><div id="profileContent" class="mt-4"></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
+
+        function renderCharacters() {
+            const container = document.querySelector('#playerCharactersContainer div.flex');
+            container.innerHTML = playerCharacters.map(char => `<div class="flex flex-col items-center"><img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/48x48?text=??'}" class="w-12 h-12 rounded-lg my-1"/><div class="font-bold text-xs text-white">${char}</div></div>`).join('');
+        }
+
+        function renderTab(tabId) {
+          const stats = tabId === 'ligaTab' ? statsLiga : statsTotal;
+          document.getElementById('ligaTab').classList.toggle('active', tabId === 'ligaTab');
+          document.getElementById('totalTab').classList.toggle('active', tabId !== 'ligaTab');
+          const setsWinRate = stats.sets.jugados > 0 ? (stats.sets.ganados / stats.sets.jugados * 100).toFixed(1) : 0;
+          const rondasWinRate = (stats.rondas.ganadas + stats.rondas.perdidas) > 0 ? (stats.rondas.ganadas / (stats.rondas.ganadas + stats.rondas.perdidas) * 100).toFixed(1) : 0;
+          
+          let bestMatchup = null;
+          let worstMatchup = null;
+          const relevantChars = Object.entries(stats.vsCharacters).filter(([,charStats]) => charStats.setsJugados >= 3);
+          if (relevantChars.length > 0) {
+              relevantChars.forEach(([char, charStats]) => {
+                  const wr = (charStats.setsGanados / charStats.setsJugados);
+                  if (!bestMatchup || wr > bestMatchup.wr) bestMatchup = { char, wr };
+                  if (!worstMatchup || wr < worstMatchup.wr) worstMatchup = { char, wr };
+              });
+          }
+
+          const sortedOpponents = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
+          let vsOpponentsHTML = Object.keys(stats.vsOpponents).length > 0 ? `<h4 class="font-semibold mb-2">Vs. Oponentes</h4><div class="space-y-2">${sortedOpponents.slice(0, PROFILE_LIST_LIMIT).map(([oppId, oppStats]) => {
+              const opponent = players.find(p => p.id === oppId); if (!opponent) return '';
+              const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
+              const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
+              return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 clickable-profile-opponent" data-id="${oppId}"><img src="${opponent.avatarUrl || 'https://via.placeholder.com/40x40?text=👤'}" class="h-10 w-10 rounded-lg player-avatar-img-zoom"/><div class="flex-1"><div class="font-bold player-name-text">${opponent.nombre}</div></div><div class="text-right"><div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div><div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div><div class="small-muted ${getWinRateColor(roundsWinRateOpp)}">${roundsWinRateOpp}%</div></div></div>`;
+          }).join('')}</div>${sortedOpponents.length > PROFILE_LIST_LIMIT ? `<div class="mt-4 text-center"><button id="showMoreOpponentsBtn" class="px-4 py-2 rounded-2xl border">Ver más oponentes</button></div>` : ''}` : '<div class="text-center small-muted py-4">No hay datos de oponentes.</div>';
+          
+          const sortedCharacters = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
+          let vsCharactersHTML = Object.keys(stats.vsCharacters).length > 0 ? `<h4 class="font-semibold mb-2 mt-4">Vs. Personajes (Sets)</h4><div class="space-y-2">${sortedCharacters.slice(0, PROFILE_LIST_LIMIT).map(([char, charStats]) => {
+              const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
+              const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
+              const matchupIcon = bestMatchup && bestMatchup.char === char ? '<span class="best-matchup">🏆</span>' : worstMatchup && worstMatchup.char === char ? '<span class="worst-matchup">💀</span>' : '';
+              return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50"><img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/><div class="flex-1"><div class="font-bold flex items-center">${char} ${matchupIcon}</div></div><div class="text-right"><div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div><div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div><div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div></div></div>`;
+          }).join('')}</div>${sortedCharacters.length > PROFILE_LIST_LIMIT ? `<div class="mt-4 text-center"><button id="showMoreCharactersBtn" class="px-4 py-2 rounded-2xl border">Ver más personajes</button></div>` : ''}` : '<div class="text-center small-muted py-4">No hay datos de personajes.</div>';
+          
+          document.getElementById('profileContent').innerHTML = `<div class="flex justify-around text-center mb-4"><div><div class="text-xs small-muted">Sets (G/P)</div><div class="text-xl font-bold">${stats.sets.ganados} / ${stats.sets.perdidos}</div><div class="text-sm font-semibold ${getWinRateColor(setsWinRate)}">${setsWinRate}% WR</div></div><div><div class="text-xs small-muted">Rondas (G/P)</div><div class="text-xl font-bold">${stats.rondas.ganadas} / ${stats.rondas.perdidas}</div><div class="text-sm font-semibold ${getWinRateColor(rondasWinRate)}">${rondasWinRate}% WR</div></div></div>${vsOpponentsHTML}${vsCharactersHTML}`;
+          document.querySelectorAll('.clickable-profile-opponent').forEach(el => { el.onclick = () => showPlayerProfile(el.dataset.id); });
+          if(document.getElementById('showMoreOpponentsBtn')) { document.getElementById('showMoreOpponentsBtn').onclick = () => showDetailedVsModal(player, stats, 'opponent'); }
+          if(document.getElementById('showMoreCharactersBtn')) { document.getElementById('showMoreCharactersBtn').onclick = () => showDetailedVsModal(player, stats, 'character'); }
+        }
+        document.getElementById('ligaTab').onclick = () => renderTab('ligaTab');
+        document.getElementById('totalTab').onclick = () => renderTab('totalTab');
+        setTimeout(() => { document.getElementById('playerProfileModalContent').classList.remove('scale-95', 'opacity-0'); renderCharacters(); renderTab('ligaTab'); }, 10);
+    }
+    
+    function showDetailedVsModal(player, stats, type) {
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+        let title, listItemsHTML = '';
+        if (type === 'opponent') {
+            title = `Historial contra oponentes de ${player.nombre}`;
+            listItemsHTML = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => b.setsGanados - a.setsGanados).map(([oppId, oppStats]) => {
+                const opponent = players.find(p => p.id === oppId); if (!opponent) return '';
+                const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
+                const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 clickable-profile-opponent cursor-pointer" data-id="${oppId}"><img src="${opponent.avatarUrl || 'https://via.placeholder.com/40x40?text=👤'}" class="h-10 w-10 rounded-lg player-avatar-img-zoom"/><div class="flex-1"><div class="font-bold player-name-text">${opponent.nombre}</div></div><div class="text-right"><div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div><div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div><div class="small-muted ${getWinRateColor(roundsWinRateOpp)}">${roundsWinRateOpp}%</div></div></div>`;
+            }).join('');
+        } else if (type === 'character') {
+            title = `Historial contra personajes de ${player.nombre}`;
+            let bestMatchup = null;
+            let worstMatchup = null;
+            const relevantChars = Object.entries(stats.vsCharacters).filter(([,charStats]) => charStats.setsJugados >= 3);
+            if (relevantChars.length > 0) {
+              relevantChars.forEach(([char, charStats]) => {
+                  const wr = (charStats.setsGanados / charStats.setsJugados);
+                  if (!bestMatchup || wr > bestMatchup.wr) bestMatchup = { char, wr };
+                  if (!worstMatchup || wr < worstMatchup.wr) worstMatchup = { char, wr };
+              });
+            }
+            listItemsHTML = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => b.setsGanados - a.setsGanados).map(([char, charStats]) => {
+                const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
+                const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                const matchupIcon = bestMatchup && bestMatchup.char === char ? '<span class="best-matchup">🏆</span>' : worstMatchup && worstMatchup.char === char ? '<span class="worst-matchup">💀</span>' : '';
+                return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50"><img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/><div class="flex-1"><div class="font-bold flex items-center">${char} ${matchupIcon}</div></div><div class="text-right"><div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div><div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div><div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div></div></div>`;
+            }).join('');
+        }
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="detailedVsModalContent" class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold mb-4">${title}</h3><div class="space-y-2">${listItemsHTML}</div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
+        setTimeout(() => {
+          document.getElementById('detailedVsModalContent').classList.remove('scale-95', 'opacity-0');
+          if (type === 'opponent') {
+              document.querySelectorAll('.clickable-profile-opponent').forEach(el => { el.onclick = () => { closeModal(); setTimeout(() => showPlayerProfile(el.dataset.id), 300); }; });
+          }
+        }, 10);
+    }
+
+    function getPlayerCharactersUsed(playerId, matchesHistory) {
+        const charCount = {};
+        matchesHistory.forEach(m => {
+            if (m.roundsData) { m.roundsData.forEach(round => {
+                if (m.jugador1Id === playerId && round.p1Char) charCount[round.p1Char] = (charCount[round.p1Char] || 0) + 1;
+                else if (m.jugador2Id === playerId && round.p2Char) charCount[round.p2Char] = (charCount[round.p2Char] || 0) + 1;
+            }); }
+        });
+        return Object.entries(charCount).sort(([, a], [, b]) => b - a).map(([char,]) => char).slice(0, 3);
+    }
+
+    function getPlayerStats(playerId, matchesHistory) {
+        const stats = { sets: { jugados: 0, ganados: 0, perdidos: 0 }, rondas: { ganadas: 0, perdidas: 0 }, vsOpponents: {}, vsCharacters: {} };
+        matchesHistory.forEach(m => {
+            const isPlayer1 = m.jugador1Id === playerId;
+            if (!isPlayer1 && m.jugador2Id !== playerId) return;
+            const isWinner = m.ganadorId === playerId;
+            stats.sets.jugados++; if (isWinner) stats.sets.ganados++; else stats.sets.perdidos++;
+            let playerRoundsWon = 0, playerRoundsLost = 0;
+            const opponentId = isPlayer1 ? m.jugador2Id : m.jugador1Id;
+            if (!stats.vsOpponents[opponentId]) stats.vsOpponents[opponentId] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0 };
+            stats.vsOpponents[opponentId].setsJugados++;
+            if (isWinner) stats.vsOpponents[opponentId].setsGanados++; else stats.vsOpponents[opponentId].setsPerdidos++;
+            if (m.roundsData) {
+                m.roundsData.forEach(round => {
+                    const opponentChar = isPlayer1 ? round.p2Char : round.p1Char;
+                    if (round.winnerId === playerId) playerRoundsWon++; else playerRoundsLost++;
+                    if (opponentChar) {
+                        if (!stats.vsCharacters[opponentChar]) stats.vsCharacters[opponentChar] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0, setsHandled: new Set() };
+                        if (round.winnerId === playerId) stats.vsCharacters[opponentChar].rondasGanadas++; else stats.vsCharacters[opponentChar].rondasPerdidas++;
+                        if (!stats.vsCharacters[opponentChar].setsHandled.has(m.id)) {
+                            stats.vsCharacters[opponentChar].setsJugados++;
+                            if (isWinner) stats.vsCharacters[opponentChar].setsGanados++; else stats.vsCharacters[opponentChar].setsPerdidos++;
+                            stats.vsCharacters[opponentChar].setsHandled.add(m.id);
+                        }
+                    }
+                });
+            }
+            stats.rondas.ganadas += playerRoundsWon;
+            stats.rondas.perdidas += playerRoundsLost;
+            stats.vsOpponents[opponentId].rondasGanadas += playerRoundsWon;
+            stats.vsOpponents[opponentId].rondasPerdidas += playerRoundsLost;
+        });
+        Object.values(stats.vsCharacters).forEach(charStats => delete charStats.setsHandled);
+        return stats;
+    }
+
+    function getWinRateColor(rate) {
+        if (rate >= 60) return 'win-rate-green';
+        if (rate >= 45) return 'win-rate-yellow';
+        return 'win-rate-red';
+    }
+
+    function updateQuickMatchButtons() {
+        const isReady = selectedPlayers.length === 2;
+        const versusBtn = document.getElementById('btnVersus');
+        versusBtn.disabled = !isReady;
+        versusBtn.classList.toggle('is-active', isReady);
+    }
+
+    rankingBody.addEventListener('click', (e) => {
+      const tr = e.target.closest('tr'); if (!tr) return;
+      const playerId = tr.dataset.id;
+      if (e.target.closest('.profile-link')) return showPlayerProfile(playerId);
+      const index = selectedPlayers.indexOf(playerId);
+      if (index > -1) selectedPlayers.splice(index, 1);
+      else if (selectedPlayers.length < 2) selectedPlayers.push(playerId);
+      else alert('Solo puedes seleccionar 2 jugadores a la vez.');
+      if (searchInput) { searchInput.value = ''; searchInput.dispatchEvent(new Event('input')); }
+      renderAll();
+    });
+    
+    function closeModal() {
+        const modal = document.querySelector('#modalRoot > div:last-child');
+        if (modal) {
+            const parentModalId = modal.dataset.parent;
+            modal.remove();
+            if (parentModalId) {
+                const parentModal = document.getElementById(parentModalId);
+                if (parentModal) { parentModal.style.display = 'flex'; return; }
+            }
+        }
+        if (document.querySelectorAll('#modalRoot > div').length === 0) document.body.classList.remove('modal-open');
+    }
+
+    // --- VERSUS FEATURE START ---
+    
+    function getVersusStats(player1Id, player2Id, matchesHistory) {
+        const stats = { p1_sets_won: 0, p2_sets_won: 0, p1_rounds_won: 0, p2_rounds_won: 0, char_matchups: {}, p1_vs_top5: {}, p2_vs_top5: {} };
+        matchesHistory.filter(m => (m.jugador1Id === player1Id && m.jugador2Id === player2Id) || (m.jugador1Id === player2Id && m.jugador2Id === player1Id))
+            .forEach(m => {
+                if (m.ganadorId === player1Id) stats.p1_sets_won++; else stats.p2_sets_won++;
+                const isP1Jugador1 = m.jugador1Id === player1Id;
+                stats.p1_rounds_won += isP1Jugador1 ? m.rondas.j1 : m.rondas.j2;
+                stats.p2_rounds_won += isP1Jugador1 ? m.rondas.j2 : m.rondas.j1;
+                if (m.roundsData) { m.roundsData.forEach(round => {
+                    const p1Char = isP1Jugador1 ? round.p1Char : round.p2Char;
+                    const p2Char = isP1Jugador1 ? round.p2Char : round.p1Char;
+                    if(p1Char && p2Char) {
+                        const key = `${p1Char} vs ${p2Char}`;
+                        if (!stats.char_matchups[key]) stats.char_matchups[key] = { p1_wins: 0, p2_wins: 0, p1_char: p1Char, p2_char: p2Char, matches: {} };
+                        stats.char_matchups[key].matches[m.id] = m;
+                        if (round.winnerId === player1Id) stats.char_matchups[key].p1_wins++; else stats.char_matchups[key].p2_wins++;
+                    }
+                }); }
+            });
+        Object.values(stats.char_matchups).forEach(matchup => { matchup.matches = Object.values(matchup.matches); });
+        const top5Ids = [...players].sort((a,b)=> b.puntos - a.puntos).slice(0, 5).map(p => p.id).filter(id => id !== player1Id && id !== player2Id);
+        top5Ids.forEach(topPlayerId => {
+            const topPlayer = players.find(p => p.id === topPlayerId); if(!topPlayer) return;
+            stats.p1_vs_top5[topPlayerId] = { name: topPlayer.nombre, wins: 0, losses: 0 };
+            matchesHistory.filter(m => (m.jugador1Id === player1Id && m.jugador2Id === topPlayerId) || (m.jugador1Id === topPlayerId && m.jugador2Id === player1Id)).forEach(m => { if (m.ganadorId === player1Id) stats.p1_vs_top5[topPlayerId].wins++; else stats.p1_vs_top5[topPlayerId].losses++; });
+            stats.p2_vs_top5[topPlayerId] = { name: topPlayer.nombre, wins: 0, losses: 0 };
+            matchesHistory.filter(m => (m.jugador1Id === player2Id && m.jugador2Id === topPlayerId) || (m.jugador1Id === topPlayerId && m.jugador2Id === player2Id)).forEach(m => { if (m.ganadorId === player2Id) stats.p2_vs_top5[topPlayerId].wins++; else stats.p2_vs_top5[topPlayerId].losses++; });
+        });
+        return stats;
+    }
+    
+    function showMatchupDetailsModal(p1, p2, matchup, parentModalId) {
+        document.getElementById(parentModalId).style.display = 'none';
+        const root = document.getElementById('modalRoot');
+        const modalId = `matchup-details-${uid()}`;
+        let tableRowsHTML = matchup.matches.length > 0 ? matchup.matches.map(m => {
+            const isP1Jugador1 = m.jugador1Id === p1.id;
+            const p1_score = isP1Jugador1 ? m.marcador.split('-')[0] : m.marcador.split('-')[1];
+            const p2_score = isP1Jugador1 ? m.marcador.split('-')[1] : m.marcador.split('-')[0];
+            const winnerName = m.ganadorId === p1.id ? p1.nombre : p2.nombre;
+            const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
+            return `<tr><td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td><td class="px-3 py-2">${p1_score}-${p2_score}</td><td class="px-3 py-2 font-semibold text-amber-400">${winnerName}</td><td class="px-3 py-2">${replayLink}</td></tr>`;
+        }).join('') : '<tr><td colspan="4" class="px-3 py-6 text-slate-400 text-center">No se encontraron partidas.</td></tr>';
+        const modalDiv = document.createElement('div');
+        modalDiv.id = modalId; modalDiv.dataset.parent = parentModalId; modalDiv.className = "fixed inset-0 z-50 flex items-center justify-center p-4";
+        modalDiv.innerHTML = `<div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl"><h3 class="text-lg font-semibold mb-4">Detalle: ${p1.nombre} (${matchup.p1_char}) vs ${p2.nombre} (${matchup.p2_char})</h3><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="text-slate-400 text-xs"><tr><th class="px-3 py-2">Fecha</th><th class="px-3 py-2">Marcador</th><th class="px-3 py-2">Ganador</th><th class="px-3 py-2">Replay</th></tr></thead><tbody>${tableRowsHTML}</tbody></table></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Volver</button></div></div>`;
+        root.appendChild(modalDiv);
+    }
+    
+    function showAllMatchupsModal(p1, p2, allMatchups, parentModalId) {
+        document.getElementById(parentModalId).style.display = 'none';
+        const root = document.getElementById('modalRoot');
+        const modalId = `all-matchups-${uid()}`;
+    
+        const modalDiv = document.createElement('div');
+        modalDiv.id = modalId;
+        modalDiv.dataset.parent = parentModalId;
+        modalDiv.className = "fixed inset-0 z-50 flex items-center justify-center p-4";
+        modalDiv.innerHTML = `<div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div class="relative w-full max-w-xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl"><h3 class="text-lg font-semibold mb-4">Enfrentamientos: ${p1.nombre} vs ${p2.nombre}</h3><div id="allMatchupsContainer" class="space-y-2"></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Volver</button></div></div>`;
+        root.appendChild(modalDiv);
+
+        const matchupsContainer = modalDiv.querySelector('#allMatchupsContainer');
+
+        if (allMatchups.length > 0) {
+            allMatchups.forEach(matchup => {
+                const hasReplay = matchup.matches.some(m => m.nota);
+                const row = document.createElement('div');
+                row.className = 'grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg clickable-matchup-row';
+                row.innerHTML = createStatRowHTML(matchup.p1_wins, matchup.p2_wins, `${matchup.p1_char} vs ${matchup.p2_char}`, CHARACTER_IMAGES[matchup.p1_char], CHARACTER_IMAGES[matchup.p2_char], hasReplay);
+                row.onclick = () => showMatchupDetailsModal(p1, p2, matchup, modalId);
+                matchupsContainer.appendChild(row);
+            });
+        } else {
+            matchupsContainer.innerHTML = '<div class="text-center small-muted py-4">No hay enfrentamientos.</div>';
+        }
+    }
+
+    function showVersusComparisonModal(player1Id, player2Id) {
+        const p1 = players.find(p => p.id === player1Id); const p2 = players.find(p => p.id === player2Id); if (!p1 || !p2) return;
+        document.body.classList.add('modal-open');
+        const root = document.getElementById('modalRoot');
+        const modalId = 'versusCompareModalContent';
+        root.innerHTML = `<div id="${modalId}" class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><div class="flex justify-around items-center text-center pb-4 border-b border-slate-700"><div class="flex flex-col items-center"><div class="relative"><img src="${p1.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>${p1.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[p1.rango] || ''}" alt="Rank ${p1.rango}" /></div>` : ''}</div><div class="text-xl font-bold mt-2">${p1.nombre}</div></div><div class="text-5xl font-bold text-slate-500">VS</div><div class="flex flex-col items-center"><div class="relative"><img src="${p2.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>${p2.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[p2.rango] || ''}" alt="Rank ${p2.rango}" /></div>` : ''}</div><div class="text-xl font-bold mt-2">${p2.nombre}</div></div></div><div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist"><button id="vsLigaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de liga actual</button><button id="vsTotalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de partidas totales</button></div><div id="versusContent" class="mt-4 space-y-2 text-sm"></div></div></div>`;
+        
+        const createStatRowHTML = (p1_wins, p2_wins, label, p1_img, p2_img, hasReplay) => {
+            const total = p1_wins + p2_wins, p1_wr = total > 0 ? (p1_wins / total * 100) : 0, p2_wr = total > 0 ? (p2_wins / total * 100) : 0;
+            const p1_img_html = p1_img ? `<img src="${p1_img}" class="w-6 h-6 rounded-md"/>` : '', p2_img_html = p2_img ? `<img src="${p2_img}" class="w-6 h-6 rounded-md"/>` : '';
+            return `<div class="text-left flex items-center gap-2"><span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span><span class="font-semibold">${p1_wins}-${p2_wins}</span></div><div class="font-bold flex items-center justify-center gap-2">${p1_img_html}<span class="${hasReplay ? 'replay-available font-semibold' : ''}">${label}</span>${p2_img_html}</div><div class="text-right flex items-center justify-end gap-2"><span class="font-semibold">${p2_wins}-${p1_wins}</span><span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span></div>`;
+        };
+
+        const renderTab = (tabId) => {
+            document.getElementById('vsLigaTab').classList.toggle('active', tabId === 'liga'); 
+            document.getElementById('vsTotalTab').classList.toggle('active', tabId !== 'liga');
+            
+            const stats = getVersusStats(p1.id, p2.id, tabId === 'liga' ? ligaMatches : allMatches);
+            const contentEl = document.getElementById('versusContent');
+            contentEl.innerHTML = `<div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg">${createStatRowHTML(stats.p1_sets_won, stats.p2_sets_won, 'Sets')}</div><div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg">${createStatRowHTML(stats.p1_rounds_won, stats.p2_rounds_won, 'Rondas')}</div>`;
+            
+            const allMatchups = Object.values(stats.char_matchups).sort((a,b) => (b.p1_wins + b.p2_wins) - (a.p1_wins + a.p2_wins));
+            
+            if (allMatchups.length > 0) {
+                const title = document.createElement('div');
+                title.className = 'font-semibold mt-4 mb-2 px-1';
+                title.textContent = 'Enfrentamientos vs Personajes (Rondas)';
+                contentEl.appendChild(title);
+
+                allMatchups.slice(0, VERSUS_CHAR_LIMIT).forEach(m => { 
+                    const row = document.createElement('div'); 
+                    row.className = 'grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg clickable-matchup-row'; 
+                    row.innerHTML = createStatRowHTML(m.p1_wins, m.p2_wins, `${m.p1_char} vs ${m.p2_char}`, CHARACTER_IMAGES[m.p1_char], CHARACTER_IMAGES[m.p2_char], m.matches.some(match => match.nota)); 
+                    row.onclick = () => showMatchupDetailsModal(p1, p2, m, modalId); 
+                    contentEl.appendChild(row); 
+                });
+
+                if (allMatchups.length > VERSUS_CHAR_LIMIT) {
+                    const moreButtonContainer = document.createElement('div');
+                    moreButtonContainer.className = 'mt-4 text-center';
+                    const moreButton = document.createElement('button');
+                    moreButton.id = 'showAllMatchupsBtn';
+                    moreButton.className = 'px-4 py-2 rounded-2xl border';
+                    moreButton.textContent = 'Ver más';
+                    moreButton.onclick = () => showAllMatchupsModal(p1, p2, allMatchups, modalId);
+                    moreButtonContainer.appendChild(moreButton);
+                    contentEl.appendChild(moreButtonContainer);
+                }
+            }
+
+            const allTopOpponents = { ...stats.p1_vs_top5, ...stats.p2_vs_top5 };
+            const topOpponentIds = Object.keys(allTopOpponents);
+            if (topOpponentIds.length > 0) {
+                let vsTop5HTML = '';
+                topOpponentIds.sort((a,b) => allTopOpponents[a].name.localeCompare(allTopOpponents[b].name)).forEach(topId => {
+                    const p1Data = stats.p1_vs_top5[topId] || { name: allTopOpponents[topId].name, wins: 0, losses: 0 }, p2Data = stats.p2_vs_top5[topId] || { name: allTopOpponents[topId].name, wins: 0, losses: 0 };
+                    if ((p1Data.wins + p1Data.losses > 0) || (p2Data.wins + p2Data.losses > 0)) {
+                        const p1_wr = (p1Data.wins + p1Data.losses) > 0 ? (p1Data.wins / (p1Data.wins + p1Data.losses) * 100) : 0, p2_wr = (p2Data.wins + p2Data.losses) > 0 ? (p2Data.wins / (p2Data.wins + p2Data.losses) * 100) : 0;
+                        vsTop5HTML += `<div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg"><div class="text-left flex items-center gap-2 justify-start"><span class="font-semibold w-12 text-center">${p1Data.wins}-${p1Data.losses}</span><span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span></div><div class="font-bold">${p1Data.name}</div><div class="text-right flex items-center justify-end"><span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span><span class="font-semibold w-12 text-center">${p2Data.wins}-${p2Data.losses}</span></div></div>`;
+                    }
+                });
+                if (vsTop5HTML) {
+                    const title = document.createElement('div');
+                    title.className = 'font-semibold mt-4 mb-2 px-1';
+                    title.textContent = 'Rendimiento vs. Top 5 (Sets)';
+                    const container = document.createElement('div');
+                    container.innerHTML = vsTop5HTML;
+                    contentEl.appendChild(title);
+                    contentEl.appendChild(container);
+                }
+            }
+        };
+
+        document.getElementById('vsLigaTab').onclick = () => renderTab('liga'); 
+        document.getElementById('vsTotalTab').onclick = () => renderTab('total');
+        setTimeout(() => { 
+            document.getElementById(modalId).querySelector('.relative').classList.remove('scale-95', 'opacity-0'); 
+            renderTab('liga'); 
+        }, 10);
+    }
+    
+    // --- EVENTOS ---
+    document.addEventListener('DOMContentLoaded', loadRemoteDataAndRender);
+    document.getElementById('btnVersus').onclick = () => { if (selectedPlayers.length === 2) showVersusComparisonModal(selectedPlayers[0], selectedPlayers[1]); };
+    document.getElementById('btnGlobalStats').onclick = showGlobalCharStatsModal;
+    document.getElementById('search').oninput = (e)=>{ const v = e.target.value.toLowerCase(); document.querySelectorAll('#rankingBody tr').forEach(tr=>{ tr.style.display = (tr.textContent||'').toLowerCase().includes(v)? '': 'none' }) }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (document.querySelectorAll('#modalRoot > div').length > 0) closeModal();
+        else { selectedPlayers = []; renderAll(); }
+      }
+    });
+
+  </script>
+</body>
+</html>
+
