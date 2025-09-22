@@ -31,21 +31,6 @@
       "discordUsername": "androidplay."
     },
     {
-      "id": "v99grx0",
-      "nombre": "MAYUSCULA",
-      "personaje": "Akuma",
-      "avatarUrl": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSBeNK9fhbi43Fz2SLfv9SGxwzifI8r3ZEvV17zyb23NaC-5kkx",
-      "puntos": 0,
-      "jugados": 0,
-      "ganados": 0,
-      "perdidos": 0,
-      "activos": false,
-      "rondasGanadas": 0,
-      "rondasPerdidas": 0,
-      "rango": "E",
-      "discordUsername": "mayusculas"
-    },
-    {
       "id": "nv899ky",
       "nombre": "Dush.",
       "personaje": "Ibuki",
@@ -74,21 +59,6 @@
       "rondasPerdidas": 8,
       "rango": "B",
       "discordUsername": "jun098"
-    },
-    {
-      "id": "jnz7is4",
-      "nombre": "NarizZ",
-      "personaje": "Yang",
-      "avatarUrl": "https://i.postimg.cc/NGJ0QHQW/how-would-these-two-interact-v0-gxvn0ovzaosc1.png",
-      "puntos": 0,
-      "jugados": 0,
-      "ganados": 0,
-      "perdidos": 0,
-      "activos": false,
-      "rondasGanadas": 0,
-      "rondasPerdidas": 0,
-      "rango": "D",
-      "discordUsername": "narizzzz"
     },
     {
       "id": "pwna4qg",
@@ -146,20 +116,6 @@
       "rondasGanadas": 5,
       "rondasPerdidas": 7,
       "activos": true,
-      "rango": "B"
-    },
-    {
-      "id": "3ma45kk",
-      "nombre": "Joseph",
-      "avatarUrl": "https://i.postimg.cc/13fGvQjs/aec81cb757fd3ccb2d9fc1c220731382-upscayl-2x-upscayl-standard-4x.png",
-      "discordUsername": "joseph6995",
-      "puntos": 0,
-      "jugados": 0,
-      "ganados": 0,
-      "perdidos": 0,
-      "rondasGanadas": 0,
-      "rondasPerdidas": 0,
-      "activos": false,
       "rango": "B"
     },
     {
