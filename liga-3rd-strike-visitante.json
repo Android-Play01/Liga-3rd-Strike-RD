@@ -39,7 +39,7 @@
       "jugados": 0,
       "ganados": 0,
       "perdidos": 0,
-      "activos": true,
+      "activos": false,
       "rondasGanadas": 0,
       "rondasPerdidas": 0,
       "rango": "E",
@@ -84,7 +84,7 @@
       "jugados": 0,
       "ganados": 0,
       "perdidos": 0,
-      "activos": true,
+      "activos": false,
       "rondasGanadas": 0,
       "rondasPerdidas": 0,
       "rango": "D",
@@ -159,7 +159,7 @@
       "perdidos": 0,
       "rondasGanadas": 0,
       "rondasPerdidas": 0,
-      "activos": true,
+      "activos": false,
       "rango": "B"
     },
     {
