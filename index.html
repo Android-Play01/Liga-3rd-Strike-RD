@@ -429,21 +429,16 @@
           </div>
         </div>
 
-        <div class="glass card p-4 relative overflow-hidden">
+        <div id="liga-scheme-card" class="glass card p-4 relative overflow-hidden">
           <div class="absolute inset-0 z-0">
              <div style="--i:10;--j:2;" class="blub"></div>
              <div style="--i:12;--j:1.8;" class="blub"></div>
              <div style="--i:16;--j:2.2;" class="blub"></div>
              <div style="--i:9;--j:1.5;" class="blub"></div>
              <div style="--i:7;--j:1.7;" class="blub"></div>
-             <div style="--i:18;--j:2.5;" class="blub"></div>
-             <div style="--i:20;--j:2;" class="blub"></div>
-             <div style="--i:16;--j:1.9;" class="blub"></div>
-             <div style="--i:21;--j:2.1;" class="blub"></div>
-             <div style="--i:5;--j:1.6;" class="blub"></div>
           </div>
           <div class="relative z-10">
-            <h3 class="font-semibold">Esquema de puntuación</h3>
+            <h3 class="font-semibold">Esquema de puntuación Liga</h3>
             <div class="mt-3 text-center small-muted space-y-3">
               <div>
                 <div class="text-sm font-medium text-slate-300 mb-1">Puntos por Ronda Ganada</div>
@@ -479,6 +474,39 @@
             </div>
           </div>
         </div>
+
+        <div id="torneo-scheme-card" class="glass card p-4 relative overflow-hidden" style="display: none;">
+            <div class="absolute inset-0 z-0">
+               <div style="--i:18;--j:2.5;" class="blub"></div>
+               <div style="--i:20;--j:2;" class="blub"></div>
+               <div style="--i:16;--j:1.9;" class="blub"></div>
+               <div style="--i:21;--j:2.1;" class="blub"></div>
+               <div style="--i:5;--j:1.6;" class="blub"></div>
+            </div>
+            <div class="relative z-10">
+              <h3 class="font-semibold">Esquema de puntuación Torneo</h3>
+              <div class="mt-3 text-center small-muted space-y-2 px-1">
+                   <div class="grid grid-cols-1 gap-y-2 text-sm">
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">1º</span> Puesto</span> <span class="font-semibold text-white text-lg">12</span></div>
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">2º</span> Puesto</span> <span class="font-semibold text-white text-lg">10</span></div>
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">3º</span> Puesto</span> <span class="font-semibold text-white text-lg">8</span></div>
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">4º</span> Puesto</span> <span class="font-semibold text-white text-lg">7</span></div>
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">5º</span> Puesto <small class="text-slate-400">(x2)</small></span> <span class="font-semibold text-white text-lg">6</span></div>
+                      <div class="p-2 rounded-lg border text-left flex items-center justify-between"><span><span class="font-bold text-lg mr-2">7º</span> Puesto <small class="text-slate-400">(x2)</small></span> <span class="font-semibold text-white text-lg">4</span></div>
+                  </div>
+              </div>
+               <div class="mt-3 small-muted text-center text-xs leading-relaxed">
+                Puntuación fija según la posición final en un torneo de doble eliminación.
+              </div>
+            </div>
+        </div>
+
+        <div class="mt-2 text-center">
+            <button id="toggle-scheme-view-btn" class="px-4 py-2 text-sm rounded-2xl border w-full hover:border-amber-500 transition-colors">
+                Mostrar Ver Esquema de Torneo
+            </button>
+        </div>
+
       </aside>
       
       <section class="lg:col-span-3 mt-6 grid lg:grid-cols-3 gap-6">
@@ -552,6 +580,28 @@
         </div>
         <div id="allHistoryMoreBtnContainer" class="mt-4 text-center"></div>
       </section>
+      
+      <section class="lg:col-span-3 glass card p-4">
+        <h3 class="font-semibold">Historial de torneo</h3>
+        <div class="mt-3 overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead class="text-slate-400 text-xs">
+              <tr>
+                <th class="px-3 py-2">Fecha</th>
+                <th class="px-3 py-2">FT</th>
+                <th class="px-3 py-2">Jugador 1</th>
+                <th class="px-3 py-2">Jugador 2</th>
+                <th class="px-3 py-2">Marcador</th>
+                <th class="px-3 py-2">Rondas</th>
+                <th class="px-3 py-2">Ganador</th>
+                <th class="px-3 py-2">Replay</th>
+              </tr>
+            </thead>
+            <tbody id="torneoHistoryBody"></tbody>
+          </table>
+        </div>
+        <div id="torneoMoreBtnContainer" class="mt-4 text-center"></div>
+      </section>
     </main>
 
     <footer class="mt-6 small-muted text-center">Prototipo — Street Fighter III: 3rd Strike • Hecho con ❤️</footer>
@@ -574,8 +624,8 @@
             const data = await response.json();
             
             players = data.players || [];
-            allMatches = (data.allMatches || []).sort((a, b) => new Date(a.fechaISO) - new Date(b.fechaISO));
-            ligaMatches = allMatches.filter(m => data.ligaMatches.some(lm => lm.id === m.id)).sort((a, b) => new Date(a.fechaISO) - new Date(b.fechaISO));
+            allMatches = (data.allMatches || []).sort((a, b) => new Date(b.fechaISO) - new Date(a.fechaISO));
+            ligaMatches = (data.ligaMatches || []).sort((a, b) => new Date(b.fechaISO) - new Date(a.fechaISO));
 
             console.log("Datos cargados exitosamente desde GitHub.");
             renderAll();
@@ -615,11 +665,13 @@
     const rankingBody = document.getElementById('rankingBody');
     const ligaHistoryBody = document.getElementById('ligaHistoryBody');
     const historyBody = document.getElementById('historyBody');
+    const torneoHistoryBody = document.getElementById('torneoHistoryBody');
     const metaSummary = document.getElementById('metaSummary');
     const searchInput = document.getElementById('search');
     const top3Container = document.getElementById('top3Container');
     const ligaMoreBtnContainer = document.getElementById('ligaMoreBtnContainer');
     const allHistoryMoreBtnContainer = document.getElementById('allHistoryMoreBtnContainer');
+    const torneoMoreBtnContainer = document.getElementById('torneoMoreBtnContainer');
     const ligaHistoryFilterContainer = document.getElementById('ligaHistoryFilterContainer');
     const allHistoryFilterContainer = document.getElementById('allHistoryFilterContainer');
 
@@ -630,8 +682,7 @@
         let currentStreak = 0;
         let streakType = '';
         
-        // Iterate backwards from the most recent match
-        for (const match of playerMatches.slice().reverse()) {
+        for (const match of playerMatches) { // Already sorted newest to oldest
             const isWinner = match.ganadorId === playerId;
             if (currentStreak === 0) {
                 streakType = isWinner ? 'win' : 'loss';
@@ -650,7 +701,7 @@
     }
 
     function calculateLast10Stats(playerId) {
-        const playerMatches = allMatches.filter(m => m.jugador1Id === playerId || m.jugador2Id === playerId).slice(-10);
+        const playerMatches = allMatches.filter(m => m.jugador1Id === playerId || m.jugador2Id === playerId).slice(0, 10);
         if (playerMatches.length === 0) return null;
         
         const wins = playerMatches.filter(m => m.ganadorId === playerId).length;
@@ -688,7 +739,10 @@
         })
       }
       const top3 = sorted.slice(0, 3);
-      top3Container.innerHTML = top3.length > 0 ? top3.map((p, i) => `<div class="top3-player flex flex-col items-center rank-${i+1} cursor-pointer" data-id="${p.id}"><div class="top3-img-container"><div class="top3-img flex items-center justify-center bg-slate-800">${p.avatarUrl ? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-full player-avatar-img-zoom"/>` : '👤'}</div>${p.rango ? `<div class="rank-badge"><img src="${RANK_IMAGES[p.rango] || ''}" alt="Rank ${p.rango}" /></div>` : ''}</div><div class="top3-name">${p.nombre}</div><div class="top3-games">${p.ganados}-${p.perdidos}</div><div class="small-muted top3-rounds">${p.rondasGanadas}-${p.rondasPerdidas}</div></div>`).join('') : '<div class="text-center w-full small-muted">No hay jugadores.</div>';
+      top3Container.innerHTML = top3.length > 0 ? top3.map((p, i) => {
+          const totalStats = getPlayerStats(p.id, ligaMatches); // Calculate total stats from league and tournament matches
+          return `<div class="top3-player flex flex-col items-center rank-${i+1} cursor-pointer" data-id="${p.id}"><div class="top3-img-container"><div class="top3-img flex items-center justify-center bg-slate-800">${p.avatarUrl ? `<img src="${p.avatarUrl}" class="h-full w-full object-cover rounded-full player-avatar-img-zoom"/>` : '👤'}</div>${p.rango ? `<div class="rank-badge"><img src="${RANK_IMAGES[p.rango] || ''}" alt="Rank ${p.rango}" /></div>` : ''}</div><div class="top3-name">${p.nombre}</div><div class="top3-games">${totalStats.sets.ganados}-${totalStats.sets.perdidos}</div><div class="small-muted top3-rounds">${totalStats.rondas.ganadas}-${totalStats.rondas.perdidas}</div></div>`
+      }).join('') : '<div class="text-center w-full small-muted">No hay jugadores.</div>';
       
       const showPlayerStatsBtn = document.getElementById('showPlayerStatsBtn');
       if (showPlayerStatsBtn) {
@@ -697,7 +751,8 @@
 
       renderHistoryTables();
       
-      metaSummary.textContent = `${players.length} jugadores · ${ligaMatches.length} sets`
+      const currentLeagueMatches = ligaMatches.filter(m => m.type !== 'tournament_match' && m.type !== 'tournament_placement');
+      metaSummary.textContent = `${players.length} jugadores · ${currentLeagueMatches.length} sets de liga`;
       
       document.querySelectorAll('.top3-player').forEach(el => {
         el.onclick = (e) => showPlayerProfile(e.currentTarget.dataset.id);
@@ -707,6 +762,7 @@
     
     function renderHistoryTables(filterLiga = 'all', filterAll = 'all') {
         const populateFilter = (container, id, currentValue) => {
+            if(!container) return;
             const playerOptions = players.map(p => `<option value="${p.id}" ${currentValue === p.id ? 'selected' : ''}>${p.nombre}</option>`).join('');
             container.innerHTML = `<select id="${id}" class="history-filter"><option value="all">Todos los jugadores</option>${playerOptions}</select>`;
         };
@@ -714,14 +770,17 @@
         populateFilter(ligaHistoryFilterContainer, 'ligaFilter', filterLiga);
         populateFilter(allHistoryFilterContainer, 'allFilter', filterAll);
         
-        document.getElementById('ligaFilter').onchange = (e) => renderHistoryTables(e.target.value, document.getElementById('allFilter').value);
-        document.getElementById('allFilter').onchange = (e) => renderHistoryTables(document.getElementById('ligaFilter').value, e.target.value);
+        if(document.getElementById('ligaFilter')) document.getElementById('ligaFilter').onchange = (e) => renderHistoryTables(e.target.value, document.getElementById('allFilter').value);
+        if(document.getElementById('allFilter')) document.getElementById('allFilter').onchange = (e) => renderHistoryTables(document.getElementById('ligaFilter').value, e.target.value);
         
-        renderHistoryTable(ligaHistoryBody, ligaMoreBtnContainer, [...ligaMatches].reverse(), filterLiga, true);
-        renderHistoryTable(historyBody, allHistoryMoreBtnContainer, [...allMatches].reverse(), filterAll, false);
+        const currentLeagueMatches = ligaMatches.filter(m => m.type !== 'tournament_match' && m.type !== 'tournament_placement');
+        renderHistoryTable(ligaHistoryBody, ligaMoreBtnContainer, currentLeagueMatches, filterLiga, 'liga');
+        renderHistoryTable(historyBody, allHistoryMoreBtnContainer, allMatches, filterAll, 'all');
+        const tournamentMatches = ligaMatches.filter(m => m.type === 'tournament_match');
+        renderHistoryTable(torneoHistoryBody, torneoMoreBtnContainer, tournamentMatches, 'all', 'torneo');
     }
     
-    function renderHistoryTable(tbody, moreBtnContainer, matches, filterPlayerId, isLiga) {
+    function renderHistoryTable(tbody, moreBtnContainer, matches, filterPlayerId, type) {
         tbody.innerHTML = '';
         moreBtnContainer.innerHTML = '';
         
@@ -732,7 +791,7 @@
         const recentMatches = filteredMatches.slice(0, HISTORY_LIMIT);
 
         if (recentMatches.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="${isLiga ? 9 : 8}" class="px-3 py-6 text-slate-400 text-center">Sin resultados.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="9" class="px-3 py-6 text-slate-400 text-center">Sin resultados.</td></tr>`;
             return;
         }
 
@@ -743,11 +802,19 @@
           const tr = document.createElement('tr');
           const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
           
-          let columns = `<td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td><td class="px-3 py-2">FT${m.ftType}</td><td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td><td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td><td class="px-3 py-2 font-medium">${m.marcador}</td>`;
-          if (isLiga) {
+          let columns = `<td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
+                         <td class="px-3 py-2">FT${m.ftType}</td>
+                         <td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td>
+                         <td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td>
+                         <td class="px-3 py-2 font-medium">${m.marcador}</td>`;
+          if (type === 'liga' || type === 'torneo') {
               columns += `<td class="px-3 py-2">${m.rondas.j1}-${m.rondas.j2}</td>`;
           }
-          columns += `<td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td><td class="px-3 py-2">+${m.puntosGanador.toFixed(2)}</td><td class="px-3 py-2 small-muted">${replayLink}</td>`;
+          columns += `<td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td>`;
+          if(type !== 'torneo') {
+             columns += `<td class="px-3 py-2">+${m.puntosGanador.toFixed(2)}</td>`;
+          }
+          columns += `<td class="px-3 py-2 small-muted">${replayLink}</td>`;
           
           tr.innerHTML = columns;
           tbody.appendChild(tr);
@@ -757,7 +824,11 @@
             const btn = document.createElement('button');
             btn.className = 'px-4 py-2 rounded-2xl border';
             btn.textContent = 'Mostrar más';
-            btn.onclick = () => showHistoryModal(filteredMatches, isLiga ? 'Historial de liga actual' : 'Historial de partidas');
+            let title = 'Historial';
+            if(type === 'liga') title = 'Historial de liga actual';
+            if(type === 'all') title = 'Historial de partidas';
+            if(type === 'torneo') title = 'Historial de Torneo';
+            btn.onclick = () => showHistoryModal(filteredMatches, title);
             moreBtnContainer.appendChild(btn);
         }
     }
@@ -765,16 +836,31 @@
     function showHistoryModal(history, title) {
         document.body.classList.add('modal-open');
         const root = document.getElementById('modalRoot');
-        const isLigaHistory = title === 'Historial de liga actual';
+        
+        const showRounds = !title.includes('partidas');
+        const showPoints = !title.includes('Torneo');
+
         let tableRows = history.map(m => {
             const j1 = players.find(p => p.id === m.jugador1Id);
             const j2 = players.find(p => p.id === m.jugador2Id);
             const g = players.find(p => p.id === m.ganadorId);
             const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
-            return `<tr><td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td><td class="px-3 py-2">FT${m.ftType}</td><td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td><td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td><td class="px-3 py-2 font-medium">${m.marcador}</td>${isLigaHistory ? `<td class="px-3 py-2">${m.rondas.j1}-${m.rondas.j2}</td>` : ''}<td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td><td class="px-3 py-2">+${m.puntosGanador.toFixed(2)}</td><td class="px-3 py-2 small-muted">${replayLink}</td></tr>`;
+            let pointsHTML = m.puntosGanador > 0 ? `+${m.puntosGanador.toFixed(2)}` : '0';
+            
+            return `<tr>
+                      <td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td>
+                      <td class="px-3 py-2">FT${m.ftType}</td>
+                      <td class="px-3 py-2">${j1 ? j1.nombre : '?'}</td>
+                      <td class="px-3 py-2">${j2 ? j2.nombre : '?'}</td>
+                      <td class="px-3 py-2 font-medium">${m.marcador}</td>
+                      ${showRounds ? `<td class="px-3 py-2">${m.rondas.j1}-${m.rondas.j2}</td>` : ''}
+                      <td class="px-3 py-2 font-semibold text-amber-400">${g ? g.nombre : '?'}</td>
+                      ${showPoints ? `<td class="px-3 py-2">${pointsHTML}</td>` : ''}
+                      <td class="px-3 py-2 small-muted">${replayLink}</td>
+                    </tr>`;
         }).join('');
 
-        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="historyModalContent" class="relative w-full max-w-4xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold mb-4">${title}</h3><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="text-slate-400 text-xs"><tr><th class="px-3 py-2">Fecha</th><th class="px-3 py-2">FT</th><th class="px-3 py-2">Jugador 1</th><th class="px-3 py-2">Jugador 2</th><th class="px-3 py-2">Marcador</th>${isLigaHistory ? `<th class="px-3 py-2">Rondas</th>` : ''}<th class="px-3 py-2">Ganador</th><th class="px-3 py-2">Puntos</th><th class="px-3 py-2">Replay</th></tr></thead><tbody>${tableRows}</tbody></table></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
+        root.innerHTML = `<div class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="historyModalContent" class="relative w-full max-w-4xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><h3 class="text-lg font-semibold mb-4">${title}</h3><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="text-slate-400 text-xs"><tr><th class="px-3 py-2">Fecha</th><th class="px-3 py-2">FT</th><th class="px-3 py-2">Jugador 1</th><th class="px-3 py-2">Jugador 2</th><th class="px-3 py-2">Marcador</th>${showRounds ? `<th class="px-3 py-2">Rondas</th>` : ''}<th class="px-3 py-2">Ganador</th>${showPoints ? `<th class="px-3 py-2">Puntos</th>` : ''}<th class="px-3 py-2">Replay</th></tr></thead><tbody>${tableRows}</tbody></table></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
         setTimeout(() => { document.getElementById('historyModalContent').classList.remove('scale-95', 'opacity-0'); }, 10);
     }
 
@@ -800,14 +886,20 @@
         document.body.classList.add('modal-open');
         const player = players.find(p => p.id === playerId);
         if (!player) return;
-        const statsLiga = getPlayerStats(player.id, ligaMatches);
-        const statsTotal = getPlayerStats(player.id, allMatches);
-        const playerCharacters = getPlayerCharactersUsed(player.id, allMatches);
-        const discordHTML = player.discordUsername ? `<div class="mt-2 flex items-center gap-2 text-slate-300"><img src="https://i.postimg.cc/yN0DgFj7/pngimg-com-discord-PNG7.png" class="w-5 h-5"/><span class="font-semibold">${player.discordUsername}</span></div>` : '';
+
+        const playerAllMatches = ligaMatches.filter(m => m.type !== 'tournament_placement' && (m.jugador1Id === playerId || m.jugador2Id === playerId));
+        const playerCharacters = getPlayerCharactersUsed(player.id, playerAllMatches);
         
+        const playerLeagueMatches = playerAllMatches.filter(m => m.type !== 'tournament_match');
+        const playerTournamentMatches = playerAllMatches.filter(m => m.type === 'tournament_match');
+
+        const statsLiga = getPlayerStats(player.id, playerLeagueMatches);
+        const statsTorneo = getPlayerStats(player.id, playerTournamentMatches);
+        const statsTotal = getPlayerStats(player.id, playerAllMatches);
+        
+        const discordHTML = player.discordUsername ? `<div class="mt-2 flex items-center gap-2 text-slate-300"><img src="https://i.postimg.cc/yN0DgFj7/pngimg-com-discord-PNG7.png" class="w-5 h-5"/><span class="font-semibold">${player.discordUsername}</span></div>` : '';
         const streak = calculateStreak(playerId);
         const last10 = calculateLast10Stats(playerId);
-        
         let extraStatsHTML = '';
         if ((streak && streak.type === 'win') || last10) {
             extraStatsHTML = '<div class="mt-2 text-md flex items-center gap-4">';
@@ -821,7 +913,7 @@
         }
         
         const root = document.getElementById('modalRoot');
-        root.innerHTML = `<div id="playerProfileContainer" class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="playerProfileModalContent" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><div class="flex justify-between items-start pb-4 border-b border-slate-700"><div class="flex items-center gap-6"><div class="flex-shrink-0 relative profile-link"><img src="${player.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800 player-avatar-img-zoom" />${player.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[player.rango] || ''}" alt="Rank ${player.rango}" /></div>` : ''}</div><div><div class="text-3xl font-bold profile-link player-name-text">${player.nombre}</div>${discordHTML}<div class="mt-2 text-md"><span class="font-bold">Sets:</span> ${statsTotal.sets.ganados}-${statsTotal.sets.perdidos}<span class="mx-2 small-muted">|</span><span class="font-bold">Rondas:</span> ${statsTotal.rondas.ganadas}-${statsTotal.rondas.perdidas}</div>${extraStatsHTML}</div></div><div id="playerCharactersContainer" class="flex flex-col items-center"><div class="text-xs small-muted">Personajes</div><div class="flex items-center gap-2 mt-2"></div></div></div><div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist"><button id="ligaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de liga actual</button><button id="totalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de partidas totales</button></div><div id="profileContent" class="mt-4"></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
+        root.innerHTML = `<div id="playerProfileContainer" class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div id="playerProfileModalContent" class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><div class="flex justify-between items-start pb-4 border-b border-slate-700"><div class="flex items-center gap-6"><div class="flex-shrink-0 relative profile-link"><img src="${player.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800 player-avatar-img-zoom" />${player.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[player.rango] || ''}" alt="Rank ${player.rango}" /></div>` : ''}</div><div><div class="text-3xl font-bold profile-link player-name-text">${player.nombre}</div>${discordHTML}<div class="mt-2 text-md"><span class="font-bold">Sets (Liga):</span> ${player.ganados}-${player.perdidos}<span class="mx-2 small-muted">|</span><span class="font-bold">Rondas (Liga):</span> ${player.rondasGanadas}-${player.rondasPerdidas}</div>${extraStatsHTML}</div></div><div id="playerCharactersContainer" class="flex flex-col items-center"><div class="text-xs small-muted">Personajes</div><div class="flex items-center gap-2 mt-2"></div></div></div><div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist"><button id="ligaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de Liga</button><button id="torneoTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de Torneo</button><button id="totalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial Total</button></div><div id="profileContent" class="mt-4"></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Cerrar</button></div></div></div>`;
 
         function renderCharacters() {
             const container = document.querySelector('#playerCharactersContainer div.flex');
@@ -829,49 +921,47 @@
         }
 
         function renderTab(tabId) {
-          const stats = tabId === 'ligaTab' ? statsLiga : statsTotal;
-          document.getElementById('ligaTab').classList.toggle('active', tabId === 'ligaTab');
-          document.getElementById('totalTab').classList.toggle('active', tabId !== 'ligaTab');
-          const setsWinRate = stats.sets.jugados > 0 ? (stats.sets.ganados / stats.sets.jugados * 100).toFixed(1) : 0;
-          const rondasWinRate = (stats.rondas.ganadas + stats.rondas.perdidas) > 0 ? (stats.rondas.ganadas / (stats.rondas.ganadas + stats.rondas.perdidas) * 100).toFixed(1) : 0;
-          
-          let bestMatchup = null;
-          let worstMatchup = null;
-          const relevantChars = Object.entries(stats.vsCharacters).filter(([,charStats]) => charStats.setsJugados >= 3);
-          if (relevantChars.length > 0) {
-              relevantChars.forEach(([char, charStats]) => {
-                  const wr = (charStats.setsGanados / charStats.setsJugados);
-                  if (!bestMatchup || wr > bestMatchup.wr) bestMatchup = { char, wr };
-                  if (!worstMatchup || wr < worstMatchup.wr) worstMatchup = { char, wr };
-              });
-          }
+            document.getElementById('ligaTab').classList.toggle('active', tabId === 'liga');
+            document.getElementById('torneoTab').classList.toggle('active', tabId === 'torneo');
+            document.getElementById('totalTab').classList.toggle('active', tabId === 'total');
+            
+            let stats;
+            if (tabId === 'liga') stats = statsLiga;
+            else if (tabId === 'torneo') stats = statsTorneo;
+            else stats = statsTotal;
 
-          const sortedOpponents = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
-          let vsOpponentsHTML = Object.keys(stats.vsOpponents).length > 0 ? `<h4 class="font-semibold mb-2">Vs. Oponentes</h4><div class="space-y-2">${sortedOpponents.slice(0, PROFILE_LIST_LIMIT).map(([oppId, oppStats]) => {
-              const opponent = players.find(p => p.id === oppId); if (!opponent) return '';
-              const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
-              const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
-              return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 clickable-profile-opponent" data-id="${oppId}" data-player-id="${playerId}"><img src="${opponent.avatarUrl || 'https://via.placeholder.com/40x40?text=👤'}" class="h-10 w-10 rounded-lg player-avatar-img-zoom"/><div class="flex-1"><div class="font-bold player-name-text">${opponent.nombre}</div></div><div class="text-right"><div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div><div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div><div class="small-muted ${getWinRateColor(roundsWinRateOpp)}">${roundsWinRateOpp}%</div></div></div>`;
-          }).join('')}</div>${sortedOpponents.length > PROFILE_LIST_LIMIT ? `<div class="mt-4 text-center"><button id="showMoreOpponentsBtn" class="px-4 py-2 rounded-2xl border">Ver más oponentes</button></div>` : ''}` : '<div class="text-center small-muted py-4">No hay datos de oponentes.</div>';
-          
-          const sortedCharacters = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => b.setsGanados - a.setsGanados);
-          let vsCharactersHTML = Object.keys(stats.vsCharacters).length > 0 ? `<h4 class="font-semibold mb-2 mt-4">Vs. Personajes (Sets)</h4><div class="space-y-2">${sortedCharacters.slice(0, PROFILE_LIST_LIMIT).map(([char, charStats]) => {
-              const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
-              const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
-              const matchupIcon = bestMatchup && bestMatchup.char === char ? '<span class="best-matchup">🏆</span>' : worstMatchup && worstMatchup.char === char ? '<span class="worst-matchup">💀</span>' : '';
-              return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50"><img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/><div class="flex-1"><div class="font-bold flex items-center">${char} ${matchupIcon}</div></div><div class="text-right"><div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div><div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div><div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div></div></div>`;
-          }).join('')}</div>${sortedCharacters.length > PROFILE_LIST_LIMIT ? `<div class="mt-4 text-center"><button id="showMoreCharactersBtn" class="px-4 py-2 rounded-2xl border">Ver más personajes</button></div>` : ''}` : '<div class="text-center small-muted py-4">No hay datos de personajes.</div>';
-          
-          document.getElementById('profileContent').innerHTML = `<div class="flex justify-around text-center mb-4"><div><div class="text-xs small-muted">Sets (G/P)</div><div class="text-xl font-bold">${stats.sets.ganados} / ${stats.sets.perdidos}</div><div class="text-sm font-semibold ${getWinRateColor(setsWinRate)}">${setsWinRate}% WR</div></div><div><div class="text-xs small-muted">Rondas (G/P)</div><div class="text-xl font-bold">${stats.rondas.ganadas} / ${stats.rondas.perdidas}</div><div class="text-sm font-semibold ${getWinRateColor(rondasWinRate)}">${rondasWinRate}% WR</div></div></div>${vsOpponentsHTML}${vsCharactersHTML}`;
-          
-          document.querySelectorAll('.clickable-profile-opponent').forEach(el => { el.onclick = () => showVersusComparisonModal(el.dataset.playerId, el.dataset.id); });
-          
-          if(document.getElementById('showMoreOpponentsBtn')) { document.getElementById('showMoreOpponentsBtn').onclick = () => showDetailedVsModal(player, stats, 'opponent'); }
-          if(document.getElementById('showMoreCharactersBtn')) { document.getElementById('showMoreCharactersBtn').onclick = () => showDetailedVsModal(player, stats, 'character'); }
+            const setsWinRate = stats.sets.jugados > 0 ? (stats.sets.ganados / stats.sets.jugados * 100).toFixed(1) : 0;
+            const rondasWinRate = (stats.rondas.ganadas + stats.rondas.perdidas) > 0 ? (stats.rondas.ganadas / (stats.rondas.ganadas + stats.rondas.perdidas) * 100).toFixed(1) : 0;
+            const sortedOpponents = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => (b.setsGanados + b.setsPerdidos) - (a.setsGanados + a.setsPerdidos));
+            let vsOpponentsHTML = Object.keys(stats.vsOpponents).length > 0 ? `<h4 class="font-semibold mb-2">Vs. Oponentes</h4><div class="space-y-2">${sortedOpponents.slice(0, PROFILE_LIST_LIMIT).map(([oppId, oppStats]) => {
+                const opponent = players.find(p => p.id === oppId); if (!opponent) return '';
+                const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
+                const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50 clickable-profile-opponent" data-player-id="${playerId}" data-id="${oppId}"><img src="${opponent.avatarUrl || 'https://via.placeholder.com/40x40?text=👤'}" class="h-10 w-10 rounded-lg player-avatar-img-zoom"/><div class="flex-1"><div class="font-bold player-name-text">${opponent.nombre}</div></div><div class="text-right"><div class="font-semibold">${oppStats.setsGanados}-${oppStats.setsPerdidos} Sets</div><div class="small-muted">${oppStats.rondasGanadas}-${oppStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateOpp)}">${setsWinRateOpp}%</div><div class="small-muted ${getWinRateColor(roundsWinRateOpp)}">${roundsWinRateOpp}%</div></div></div>`;
+            }).join('')}</div>${sortedOpponents.length > PROFILE_LIST_LIMIT ? `<div class="mt-4 text-center"><button id="showMoreOpponentsBtn" class="px-4 py-2 rounded-2xl border">Ver más oponentes</button></div>` : ''}` : '<div class="text-center small-muted py-4">No hay datos de oponentes.</div>';
+            
+            const sortedCharacters = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => (b.setsGanados + b.setsPerdidos) - (a.setsGanados + a.setsPerdidos));
+            let vsCharactersHTML = Object.keys(stats.vsCharacters).length > 0 ? `<h4 class="font-semibold mb-2 mt-4">Vs. Personajes (Sets)</h4><div class="space-y-2">${sortedCharacters.slice(0, PROFILE_LIST_LIMIT).map(([char, charStats]) => {
+                const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
+                const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
+                return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50"><img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/><div class="flex-1"><div class="font-bold flex items-center">${char}</div></div><div class="text-right"><div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div><div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div><div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div></div></div>`;
+            }).join('')}</div>${sortedCharacters.length > PROFILE_LIST_LIMIT ? `<div class="mt-4 text-center"><button id="showMoreCharactersBtn" class="px-4 py-2 rounded-2xl border">Ver más personajes</button></div>` : ''}` : '<div class="text-center small-muted py-4">No hay datos de personajes.</div>';
+            
+            const statsSummaryHTML = `<div class="flex justify-around text-center mb-4"><div><div class="text-xs small-muted">Sets (G/P)</div><div class="text-xl font-bold">${stats.sets.ganados} / ${stats.sets.perdidos}</div><div class="text-sm font-semibold ${getWinRateColor(setsWinRate)}">${setsWinRate}% WR</div></div><div><div class="text-xs small-muted">Rondas (G/P)</div><div class="text-xl font-bold">${stats.rondas.ganadas} / ${stats.rondas.perdidas}</div><div class="text-sm font-semibold ${getWinRateColor(rondasWinRate)}">${rondasWinRate}% WR</div></div></div>`;
+            
+            document.getElementById('profileContent').innerHTML = `${statsSummaryHTML}${vsOpponentsHTML}${vsCharactersHTML}`;
+            
+            document.querySelectorAll('.clickable-profile-opponent').forEach(el => { el.onclick = () => showVersusComparisonModal(el.dataset.playerId, el.dataset.id); });
+            
+            if(document.getElementById('showMoreOpponentsBtn')) { document.getElementById('showMoreOpponentsBtn').onclick = () => showDetailedVsModal(player, stats, 'opponent'); }
+            if(document.getElementById('showMoreCharactersBtn')) { document.getElementById('showMoreCharactersBtn').onclick = () => showDetailedVsModal(player, stats, 'character'); }
         }
-        document.getElementById('ligaTab').onclick = () => renderTab('ligaTab');
-        document.getElementById('totalTab').onclick = () => renderTab('totalTab');
-        setTimeout(() => { document.getElementById('playerProfileModalContent').classList.remove('scale-95', 'opacity-0'); renderCharacters(); renderTab('ligaTab'); }, 10);
+
+        document.getElementById('ligaTab').onclick = () => renderTab('liga');
+        document.getElementById('torneoTab').onclick = () => renderTab('torneo');
+        document.getElementById('totalTab').onclick = () => renderTab('total');
+
+        setTimeout(() => { document.getElementById('playerProfileModalContent').classList.remove('scale-95', 'opacity-0'); renderCharacters(); renderTab('liga'); }, 10);
     }
     
     function showDetailedVsModal(player, stats, type) {
@@ -883,7 +973,7 @@
         
         if (type === 'opponent') {
             title = `Historial contra oponentes de ${player.nombre}`;
-            listItemsHTML = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => b.setsGanados - a.setsGanados).map(([oppId, oppStats]) => {
+            listItemsHTML = Object.entries(stats.vsOpponents).sort(([, a], [, b]) => (b.setsGanados + b.setsPerdidos) - (a.setsGanados + a.setsPerdidos)).map(([oppId, oppStats]) => {
                 const opponent = players.find(p => p.id === oppId); if (!opponent) return '';
                 const setsWinRateOpp = oppStats.setsJugados > 0 ? (oppStats.setsGanados / oppStats.setsJugados * 100).toFixed(1) : 0;
                 const roundsWinRateOpp = (oppStats.rondasGanadas + oppStats.rondasPerdidas) > 0 ? (oppStats.rondasGanadas / (oppStats.rondasGanadas + oppStats.rondasPerdidas) * 100).toFixed(1) : 0;
@@ -891,8 +981,7 @@
             }).join('');
         } else if (type === 'character') {
             title = `Historial contra personajes de ${player.nombre}`;
-            // ... (character logic remains the same)
-            listItemsHTML = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => b.setsGanados - a.setsGanados).map(([char, charStats]) => {
+            listItemsHTML = Object.entries(stats.vsCharacters).sort(([, a], [, b]) => (b.setsGanados + b.setsPerdidos) - (a.setsGanados + a.setsPerdidos)).map(([char, charStats]) => {
                 const setsWinRateChar = charStats.setsJugados > 0 ? (charStats.setsGanados / charStats.setsJugados * 100).toFixed(1) : 0;
                 const roundsWinRateChar = (charStats.rondasGanadas + charStats.rondasPerdidas) > 0 ? (charStats.rondasGanadas / (charStats.rondasGanadas + charStats.rondasPerdidas) * 100).toFixed(1) : 0;
                 return `<div class="flex items-center gap-3 p-2 rounded-lg bg-slate-800/50"><img src="${CHARACTER_IMAGES[char] || 'https://via.placeholder.com/40x40?text=??'}" class="h-10 w-10 rounded-lg"/><div class="flex-1"><div class="font-bold">${char}</div></div><div class="text-right"><div class="font-semibold">${charStats.setsGanados}-${charStats.setsPerdidos} Sets</div><div class="small-muted">${charStats.rondasGanadas}-${charStats.rondasPerdidas} Rondas</div></div><div class="w-16 text-right"><div class="font-bold ${getWinRateColor(setsWinRateChar)}">${setsWinRateChar}%</div><div class="small-muted ${getWinRateColor(roundsWinRateChar)}">${roundsWinRateChar}%</div></div></div>`;
@@ -930,16 +1019,27 @@
             const isPlayer1 = m.jugador1Id === playerId;
             if (!isPlayer1 && m.jugador2Id !== playerId) return;
             const isWinner = m.ganadorId === playerId;
-            stats.sets.jugados++; if (isWinner) stats.sets.ganados++; else stats.sets.perdidos++;
-            let playerRoundsWon = 0, playerRoundsLost = 0;
+            
+            stats.sets.jugados++;
+            if (isWinner) stats.sets.ganados++; else stats.sets.perdidos++;
+
+            let playerRoundsWon = isPlayer1 ? m.rondas.j1 : m.rondas.j2;
+            let playerRoundsLost = isPlayer1 ? m.rondas.j2 : m.rondas.j1;
+            stats.rondas.ganadas += playerRoundsWon;
+            stats.rondas.perdidas += playerRoundsLost;
+            
             const opponentId = isPlayer1 ? m.jugador2Id : m.jugador1Id;
-            if (!stats.vsOpponents[opponentId]) stats.vsOpponents[opponentId] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0 };
-            stats.vsOpponents[opponentId].setsJugados++;
-            if (isWinner) stats.vsOpponents[opponentId].setsGanados++; else stats.vsOpponents[opponentId].setsPerdidos++;
+            if (opponentId) {
+                if (!stats.vsOpponents[opponentId]) stats.vsOpponents[opponentId] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0 };
+                stats.vsOpponents[opponentId].setsJugados++;
+                if (isWinner) stats.vsOpponents[opponentId].setsGanados++; else stats.vsOpponents[opponentId].setsPerdidos++;
+                stats.vsOpponents[opponentId].rondasGanadas += playerRoundsWon;
+                stats.vsOpponents[opponentId].rondasPerdidas += playerRoundsLost;
+            }
+            
             if (m.roundsData) {
                 m.roundsData.forEach(round => {
                     const opponentChar = isPlayer1 ? round.p2Char : round.p1Char;
-                    if (round.winnerId === playerId) playerRoundsWon++; else playerRoundsLost++;
                     if (opponentChar) {
                         if (!stats.vsCharacters[opponentChar]) stats.vsCharacters[opponentChar] = { setsJugados: 0, setsGanados: 0, setsPerdidos: 0, rondasGanadas: 0, rondasPerdidas: 0, setsHandled: new Set() };
                         if (round.winnerId === playerId) stats.vsCharacters[opponentChar].rondasGanadas++; else stats.vsCharacters[opponentChar].rondasPerdidas++;
@@ -951,10 +1051,6 @@
                     }
                 });
             }
-            stats.rondas.ganadas += playerRoundsWon;
-            stats.rondas.perdidas += playerRoundsLost;
-            stats.vsOpponents[opponentId].rondasGanadas += playerRoundsWon;
-            stats.vsOpponents[opponentId].rondasPerdidas += playerRoundsLost;
         });
         Object.values(stats.vsCharacters).forEach(charStats => delete charStats.setsHandled);
         return stats;
@@ -1006,91 +1102,12 @@
         if (document.querySelectorAll('#modalRoot > div').length === 0) document.body.classList.remove('modal-open');
     }
 
-    // --- VERSUS FEATURE START ---
-    
-    function getVersusStats(player1Id, player2Id, matchesHistory) {
-        const stats = { p1_sets_won: 0, p2_sets_won: 0, p1_rounds_won: 0, p2_rounds_won: 0, char_matchups: {}, p1_vs_top5: {}, p2_vs_top5: {} };
-        matchesHistory.filter(m => (m.jugador1Id === player1Id && m.jugador2Id === player2Id) || (m.jugador1Id === player2Id && m.jugador2Id === player1Id))
-            .forEach(m => {
-                if (m.ganadorId === player1Id) stats.p1_sets_won++; else stats.p2_sets_won++;
-                const isP1Jugador1 = m.jugador1Id === player1Id;
-                stats.p1_rounds_won += isP1Jugador1 ? m.rondas.j1 : m.rondas.j2;
-                stats.p2_rounds_won += isP1Jugador1 ? m.rondas.j2 : m.rondas.j1;
-                if (m.roundsData) { m.roundsData.forEach(round => {
-                    const p1Char = isP1Jugador1 ? round.p1Char : round.p2Char;
-                    const p2Char = isP1Jugador1 ? round.p2Char : round.p1Char;
-                    if(p1Char && p2Char) {
-                        const key = `${p1Char} vs ${p2Char}`;
-                        if (!stats.char_matchups[key]) stats.char_matchups[key] = { p1_wins: 0, p2_wins: 0, p1_char: p1Char, p2_char: p2Char, matches: {} };
-                        stats.char_matchups[key].matches[m.id] = m;
-                        if (round.winnerId === player1Id) stats.char_matchups[key].p1_wins++; else stats.char_matchups[key].p2_wins++;
-                    }
-                }); }
-            });
-        Object.values(stats.char_matchups).forEach(matchup => { matchup.matches = Object.values(matchup.matches); });
-        const top5Ids = [...players].sort((a,b)=> b.puntos - a.puntos).slice(0, 5).map(p => p.id).filter(id => id !== player1Id && id !== player2Id);
-        top5Ids.forEach(topPlayerId => {
-            const topPlayer = players.find(p => p.id === topPlayerId); if(!topPlayer) return;
-            stats.p1_vs_top5[topPlayerId] = { name: topPlayer.nombre, wins: 0, losses: 0 };
-            matchesHistory.filter(m => (m.jugador1Id === player1Id && m.jugador2Id === topPlayerId) || (m.jugador1Id === topPlayerId && m.jugador2Id === player1Id)).forEach(m => { if (m.ganadorId === player1Id) stats.p1_vs_top5[topPlayerId].wins++; else stats.p1_vs_top5[topPlayerId].losses++; });
-            stats.p2_vs_top5[topPlayerId] = { name: topPlayer.nombre, wins: 0, losses: 0 };
-            matchesHistory.filter(m => (m.jugador1Id === player2Id && m.jugador2Id === topPlayerId) || (m.jugador1Id === topPlayerId && m.jugador2Id === player2Id)).forEach(m => { if (m.ganadorId === player2Id) stats.p2_vs_top5[topPlayerId].wins++; else stats.p2_vs_top5[topPlayerId].losses++; });
-        });
-        return stats;
-    }
-    
-    function showMatchupDetailsModal(p1, p2, matchup, parentModalId) {
-        document.getElementById(parentModalId).style.display = 'none';
-        const root = document.getElementById('modalRoot');
-        const modalId = `matchup-details-${uid()}`;
-        let tableRowsHTML = matchup.matches.length > 0 ? matchup.matches.map(m => {
-            const isP1Jugador1 = m.jugador1Id === p1.id;
-            const p1_score = isP1Jugador1 ? m.marcador.split('-')[0] : m.marcador.split('-')[1];
-            const p2_score = isP1Jugador1 ? m.marcador.split('-')[1] : m.marcador.split('-')[0];
-            const winnerName = m.ganadorId === p1.id ? p1.nombre : p2.nombre;
-            const replayLink = m.nota ? `<a href="${m.nota}" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-semibold">LINK</a>` : '—';
-            return `<tr><td class="px-3 py-2 small-muted">${fmtDate(m.fechaISO)}</td><td class="px-3 py-2">${p1_score}-${p2_score}</td><td class="px-3 py-2 font-semibold text-amber-400">${winnerName}</td><td class="px-3 py-2">${replayLink}</td></tr>`;
-        }).join('') : '<tr><td colspan="4" class="px-3 py-6 text-slate-400 text-center">No se encontraron partidas.</td></tr>';
-        const modalDiv = document.createElement('div');
-        modalDiv.id = modalId; modalDiv.dataset.parent = parentModalId; modalDiv.className = "fixed inset-0 z-50 flex items-center justify-center p-4";
-        modalDiv.innerHTML = `<div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div class="relative w-full max-w-2xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl"><h3 class="text-lg font-semibold mb-4">Detalle: ${p1.nombre} (${matchup.p1_char}) vs ${p2.nombre} (${matchup.p2_char})</h3><div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead class="text-slate-400 text-xs"><tr><th class="px-3 py-2">Fecha</th><th class="px-3 py-2">Marcador</th><th class="px-3 py-2">Ganador</th><th class="px-3 py-2">Replay</th></tr></thead><tbody>${tableRowsHTML}</tbody></table></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Volver</button></div></div>`;
-        root.appendChild(modalDiv);
-    }
-    
-    function showAllMatchupsModal(p1, p2, allMatchups, parentModalId) {
-        document.getElementById(parentModalId).style.display = 'none';
-        const root = document.getElementById('modalRoot');
-        const modalId = `all-matchups-${uid()}`;
-    
-        const modalDiv = document.createElement('div');
-        modalDiv.id = modalId;
-        modalDiv.dataset.parent = parentModalId;
-        modalDiv.className = "fixed inset-0 z-50 flex items-center justify-center p-4";
-        modalDiv.innerHTML = `<div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div class="relative w-full max-w-xl max-h-[80vh] overflow-y-auto glass p-5 rounded-xl"><h3 class="text-lg font-semibold mb-4">Enfrentamientos: ${p1.nombre} vs ${p2.nombre}</h3><div id="allMatchupsContainer" class="space-y-2"></div><div class="mt-4 text-right"><button onclick="closeModal()" class="px-3 py-2 rounded-xl border">Volver</button></div></div>`;
-        root.appendChild(modalDiv);
-
-        const matchupsContainer = modalDiv.querySelector('#allMatchupsContainer');
-
-        if (allMatchups.length > 0) {
-            allMatchups.forEach(matchup => {
-                const hasReplay = matchup.matches.some(m => m.nota);
-                const row = document.createElement('div');
-                row.className = 'grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg clickable-matchup-row';
-                row.innerHTML = createStatRowHTML(matchup.p1_wins, matchup.p2_wins, `${matchup.p1_char} vs ${matchup.p2_char}`, CHARACTER_IMAGES[matchup.p1_char], CHARACTER_IMAGES[matchup.p2_char], hasReplay);
-                row.onclick = () => showMatchupDetailsModal(p1, p2, matchup, modalId);
-                matchupsContainer.appendChild(row);
-            });
-        } else {
-            matchupsContainer.innerHTML = '<div class="text-center small-muted py-4">No hay enfrentamientos.</div>';
-        }
-    }
-
     function showVersusComparisonModal(player1Id, player2Id) {
         const p1 = players.find(p => p.id === player1Id); const p2 = players.find(p => p.id === player2Id); if (!p1 || !p2) return;
         document.body.classList.add('modal-open');
         const root = document.getElementById('modalRoot');
         const modalId = 'versusCompareModalContent';
-        root.innerHTML = `<div id="${modalId}" class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><div class="flex justify-around items-center text-center pb-4 border-b border-slate-700"><div class="flex flex-col items-center"><div class="relative"><img src="${p1.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>${p1.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[p1.rango] || ''}" alt="Rank ${p1.rango}" /></div>` : ''}</div><div class="text-xl font-bold mt-2">${p1.nombre}</div></div><div class="text-5xl font-bold text-slate-500">VS</div><div class="flex flex-col items-center"><div class="relative"><img src="${p2.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>${p2.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[p2.rango] || ''}" alt="Rank ${p2.rango}" /></div>` : ''}</div><div class="text-xl font-bold mt-2">${p2.nombre}</div></div></div><div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist"><button id="vsLigaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de liga actual</button><button id="vsTotalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de partidas totales</button></div><div id="versusContent" class="mt-4 space-y-2 text-sm"></div></div></div>`;
+        root.innerHTML = `<div id="${modalId}" class="fixed inset-0 z-50 flex items-center justify-center p-4"><div class="absolute inset-0 bg-black/60" onclick="closeModal()"></div><div class="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto glass p-5 rounded-xl transition-all duration-300 ease-out transform scale-95 opacity-0"><div class="flex justify-around items-center text-center pb-4 border-b border-slate-700"><div class="flex flex-col items-center"><div class="relative"><img src="${p1.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>${p1.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[p1.rango] || ''}" alt="Rank ${p1.rango}" /></div>` : ''}</div><div class="text-xl font-bold mt-2">${p1.nombre}</div></div><div class="text-5xl font-bold text-slate-500">VS</div><div class="flex flex-col items-center"><div class="relative"><img src="${p2.avatarUrl || 'https://via.placeholder.com/90x90?text=👤'}" class="profile-avatar bg-slate-800"/>${p2.rango ? `<div class="rank-badge w-10 h-10 right-0 bottom-0"><img src="${RANK_IMAGES[p2.rango] || ''}" alt="Rank ${p2.rango}" /></div>` : ''}</div><div class="text-xl font-bold mt-2">${p2.nombre}</div></div></div><div class="mt-4 flex profile-tabs border-b border-slate-800" role="tablist"><button id="vsLigaTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial de liga</button><button id="vsTotalTab" class="px-4 py-2 hover:bg-slate-800 transition-colors">Historial total</button></div><div id="versusContent" class="mt-4 space-y-2 text-sm"></div></div></div>`;
         
         const createStatRowHTML = (p1_wins, p2_wins, label, p1_img, p2_img, hasReplay) => {
             const total = p1_wins + p2_wins, p1_wr = total > 0 ? (p1_wins / total * 100) : 0, p2_wr = total > 0 ? (p2_wins / total * 100) : 0;
@@ -1102,7 +1119,8 @@
             document.getElementById('vsLigaTab').classList.toggle('active', tabId === 'liga'); 
             document.getElementById('vsTotalTab').classList.toggle('active', tabId !== 'liga');
             
-            const stats = getVersusStats(p1.id, p2.id, tabId === 'liga' ? ligaMatches : allMatches);
+            const matchesToUse = tabId === 'liga' ? ligaMatches : allMatches;
+            const stats = getVersusStats(p1.id, p2.id, matchesToUse);
             const contentEl = document.getElementById('versusContent');
             contentEl.innerHTML = `<div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg">${createStatRowHTML(stats.p1_sets_won, stats.p2_sets_won, 'Sets')}</div><div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg">${createStatRowHTML(stats.p1_rounds_won, stats.p2_rounds_won, 'Rondas')}</div>`;
             
@@ -1134,51 +1152,48 @@
                     contentEl.appendChild(moreButtonContainer);
                 }
             }
-
-            const allTopOpponents = { ...stats.p1_vs_top5, ...stats.p2_vs_top5 };
-            const topOpponentIds = Object.keys(allTopOpponents);
-            if (topOpponentIds.length > 0) {
-                let vsTop5HTML = '';
-                topOpponentIds.sort((a,b) => allTopOpponents[a].name.localeCompare(allTopOpponents[b].name)).forEach(topId => {
-                    const p1Data = stats.p1_vs_top5[topId] || { name: allTopOpponents[topId].name, wins: 0, losses: 0 }, p2Data = stats.p2_vs_top5[topId] || { name: allTopOpponents[topId].name, wins: 0, losses: 0 };
-                    if ((p1Data.wins + p1Data.losses > 0) || (p2Data.wins + p2Data.losses > 0)) {
-                        const p1_wr = (p1Data.wins + p1Data.losses) > 0 ? (p1Data.wins / (p1Data.wins + p1Data.losses) * 100) : 0, p2_wr = (p2Data.wins + p2Data.losses) > 0 ? (p2Data.wins / (p2Data.wins + p2Data.losses) * 100) : 0;
-                        vsTop5HTML += `<div class="grid grid-cols-3 items-center text-center bg-slate-800/50 p-2 rounded-lg"><div class="text-left flex items-center gap-2 justify-start"><span class="font-semibold w-12 text-center">${p1Data.wins}-${p1Data.losses}</span><span class="font-bold ${getWinRateColor(p1_wr)} w-12">${p1_wr.toFixed(0)}%</span></div><div class="font-bold">${p1Data.name}</div><div class="text-right flex items-center justify-end"><span class="font-bold ${getWinRateColor(p2_wr)} w-12">${p2_wr.toFixed(0)}%</span><span class="font-semibold w-12 text-center">${p2Data.wins}-${p2Data.losses}</span></div></div>`;
-                    }
-                });
-                if (vsTop5HTML) {
-                    const title = document.createElement('div');
-                    title.className = 'font-semibold mt-4 mb-2 px-1';
-                    title.textContent = 'Rendimiento vs. Top 5 (Sets)';
-                    const container = document.createElement('div');
-                    container.innerHTML = vsTop5HTML;
-                    contentEl.appendChild(title);
-                    contentEl.appendChild(container);
-                }
-            }
         };
 
         document.getElementById('vsLigaTab').onclick = () => renderTab('liga'); 
         document.getElementById('vsTotalTab').onclick = () => renderTab('total');
         setTimeout(() => { 
             document.getElementById(modalId).querySelector('.relative').classList.remove('scale-95', 'opacity-0'); 
-            renderTab('liga'); 
+            renderTab('total'); 
         }, 10);
     }
     
     // --- EVENTOS ---
-    document.addEventListener('DOMContentLoaded', loadRemoteDataAndRender);
-    document.getElementById('btnVersus').onclick = () => { if (selectedPlayers.length === 2) showVersusComparisonModal(selectedPlayers[0], selectedPlayers[1]); };
-    document.getElementById('showPlayerStatsBtn').onclick = showPlayerStatsModal;
-    document.getElementById('search').oninput = (e)=>{ const v = e.target.value.toLowerCase(); document.querySelectorAll('#rankingBody tr').forEach(tr=>{ tr.style.display = (tr.textContent||'').toLowerCase().includes(v)? '': 'none' }) }
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        if (document.querySelectorAll('#modalRoot > div').length > 0) closeModal();
-        else { selectedPlayers = []; renderAll(); }
-      }
+    document.addEventListener('DOMContentLoaded', () => {
+        loadRemoteDataAndRender();
+        document.getElementById('btnVersus').onclick = () => { if (selectedPlayers.length === 2) showVersusComparisonModal(selectedPlayers[0], selectedPlayers[1]); };
+        document.getElementById('showPlayerStatsBtn').onclick = showPlayerStatsModal;
+        document.getElementById('search').oninput = (e)=>{ const v = e.target.value.toLowerCase(); document.querySelectorAll('#rankingBody tr').forEach(tr=>{ tr.style.display = (tr.textContent||'').toLowerCase().includes(v)? '': 'none' }) }
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            if (document.querySelectorAll('#modalRoot > div').length > 0) closeModal();
+            else { selectedPlayers = []; renderAll(); }
+          }
+        });
+        const toggleSchemeBtn = document.getElementById('toggle-scheme-view-btn');
+        const ligaSchemeCard = document.getElementById('liga-scheme-card');
+        const torneoSchemeCard = document.getElementById('torneo-scheme-card');
+
+        if (toggleSchemeBtn) {
+            toggleSchemeBtn.onclick = () => {
+                const isLigaVisible = ligaSchemeCard.style.display !== 'none';
+                if (isLigaVisible) {
+                    ligaSchemeCard.style.display = 'none';
+                    torneoSchemeCard.style.display = 'block';
+                    toggleSchemeBtn.textContent = 'Mostrar Ver Esquema de Liga';
+                } else {
+                    ligaSchemeCard.style.display = 'block';
+                    torneoSchemeCard.style.display = 'none';
+                    toggleSchemeBtn.textContent = 'Mostrar Ver Esquema de Torneo';
+                }
+            };
+        }
     });
 
   </script>
 </body>
 </html>
-
