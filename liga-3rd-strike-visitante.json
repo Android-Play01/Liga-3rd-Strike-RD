@@ -1814,10 +1814,10 @@
       "ftType": 3,
       "jugador1Id": "vdqht9u",
       "jugador2Id": "435x8vs",
-      "marcador": "3-0",
+      "marcador": "0-0",
       "rondas": {
-        "j1": 3,
-        "j2": 0
+        "j1": 0,
+        "j2": 3
       },
       "ganadorId": "vdqht9u",
       "puntosGanador": 0,
