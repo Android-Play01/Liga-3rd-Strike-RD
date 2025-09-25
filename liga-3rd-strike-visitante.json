@@ -1814,28 +1814,28 @@
       "ftType": 3,
       "jugador1Id": "vdqht9u",
       "jugador2Id": "435x8vs",
-      "marcador": "3-0",
+      "marcador": "0-3",
       "rondas": {
-        "j1": 3,
-        "j2": 0
+        "j1": 0,
+        "j2": 3
       },
-      "ganadorId": "vdqht9u",
+      "ganadorId": "435x8vs",
       "puntosGanador": 0,
       "puntosPerdedor": 0,
       "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758491741282-5649",
       "roundsData": [
         {
-          "winnerId": "vdqht9u",
+          "winnerId": "435x8vs",
           "p1Char": "Makoto",
           "p2Char": "Dudley"
         },
         {
-          "winnerId": "vdqht9u",
+          "winnerId": "435x8vs",
           "p1Char": "Makoto",
           "p2Char": "Dudley"
         },
         {
-          "winnerId": "vdqht9u",
+          "winnerId": "435x8vs",
           "p1Char": "Makoto",
           "p2Char": "Dudley"
         }
@@ -3490,28 +3490,28 @@
       "ftType": 3,
       "jugador1Id": "vdqht9u",
       "jugador2Id": "435x8vs",
-      "marcador": "3-0",
+      "marcador": "0-3",
       "rondas": {
-        "j1": 3,
-        "j2": 0
+        "j1": 0,
+        "j2": 3
       },
-      "ganadorId": "vdqht9u",
+      "ganadorId": "435x8vs",
       "puntosGanador": 0,
       "puntosPerdedor": 0,
       "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758491741282-5649",
       "roundsData": [
         {
-          "winnerId": "vdqht9u",
+          "winnerId": "435x8vs",
           "p1Char": "Makoto",
           "p2Char": "Dudley"
         },
         {
-          "winnerId": "vdqht9u",
+          "winnerId": "435x8vs",
           "p1Char": "Makoto",
           "p2Char": "Dudley"
         },
         {
-          "winnerId": "vdqht9u",
+          "winnerId": "435x8vs",
           "p1Char": "Makoto",
           "p2Char": "Dudley"
         }
