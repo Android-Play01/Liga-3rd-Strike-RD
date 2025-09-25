@@ -20,13 +20,13 @@
       "nombre": "Android Play",
       "personaje": "Ryu",
       "avatarUrl": "https://i.pinimg.com/736x/71/ae/f6/71aef604b44135f7d1b21def318c7d44.jpg",
-      "puntos": 12,
-      "jugados": 4,
-      "ganados": 0,
-      "perdidos": 0,
+      "puntos": 34.73,
+      "jugados": 11,
+      "ganados": 5,
+      "perdidos": 2,
       "activos": true,
-      "rondasGanadas": 0,
-      "rondasPerdidas": 0,
+      "rondasGanadas": 19,
+      "rondasPerdidas": 8,
       "rango": "A",
       "discordUsername": "androidplay."
     },
@@ -35,13 +35,13 @@
       "nombre": "Dush.",
       "personaje": "Ibuki",
       "avatarUrl": "https://i.postimg.cc/ZncpqKKw/Captura-de-pantalla-2025-09-04-230423.png",
-      "puntos": 10,
-      "jugados": 6,
-      "ganados": 0,
-      "perdidos": 0,
+      "puntos": 43.73999999999999,
+      "jugados": 17,
+      "ganados": 8,
+      "perdidos": 3,
       "activos": true,
-      "rondasGanadas": 0,
-      "rondasPerdidas": 0,
+      "rondasGanadas": 27,
+      "rondasPerdidas": 18,
       "rango": "B",
       "discordUsername": ".dush."
     },
@@ -50,13 +50,13 @@
       "nombre": "LeverlessJun",
       "personaje": "Makoto",
       "avatarUrl": "https://i.postimg.cc/MTcvRD4L/leverless-2025-09-09-08-17-20-788614-jpg.png",
-      "puntos": 7,
-      "jugados": 4,
-      "ganados": 0,
-      "perdidos": 0,
+      "puntos": 32.4,
+      "jugados": 12,
+      "ganados": 6,
+      "perdidos": 2,
       "activos": true,
-      "rondasGanadas": 0,
-      "rondasPerdidas": 0,
+      "rondasGanadas": 20,
+      "rondasPerdidas": 11,
       "rango": "B",
       "discordUsername": "jun098"
     },
@@ -65,13 +65,13 @@
       "nombre": "RaeZe",
       "personaje": "Ryu",
       "avatarUrl": "https://i.pinimg.com/1200x/e9/26/37/e926373e799251193fb2956a50d81f29.jpg",
-      "puntos": 4,
-      "jugados": 2,
-      "ganados": 0,
-      "perdidos": 0,
+      "puntos": 22.880000000000003,
+      "jugados": 15,
+      "ganados": 4,
+      "perdidos": 9,
       "activos": true,
-      "rondasGanadas": 0,
-      "rondasPerdidas": 0,
+      "rondasGanadas": 19,
+      "rondasPerdidas": 30,
       "rango": "B",
       "discordUsername": "_raeze"
     },
@@ -80,13 +80,13 @@
       "nombre": "Elangelsombrio",
       "personaje": "Makoto",
       "avatarUrl": "https://i.postimg.cc/sgBmT72y/we-all-know-that-p5-has-a-lot-of-games-and-spinoffs-but-v0-d8han3ucxrpd1.png",
-      "puntos": 0,
-      "jugados": 2,
-      "ganados": 0,
-      "perdidos": 0,
+      "puntos": 3.68,
+      "jugados": 6,
+      "ganados": 1,
+      "perdidos": 3,
       "activos": true,
-      "rondasGanadas": 0,
-      "rondasPerdidas": 0,
+      "rondasGanadas": 4,
+      "rondasPerdidas": 10,
       "rango": "C",
       "discordUsername": "lblackkaiserl"
     },
@@ -94,12 +94,12 @@
       "id": "jex250n",
       "nombre": "OniRinku11",
       "avatarUrl": "https://i.postimg.cc/NFXq693f/171c6252439fb3c4aae225146b323cef-2025-09-08-19-44-18-373419-jpg.png",
-      "puntos": 6,
-      "jugados": 3,
+      "puntos": 9.81,
+      "jugados": 6,
       "ganados": 0,
-      "perdidos": 0,
-      "rondasGanadas": 0,
-      "rondasPerdidas": 0,
+      "perdidos": 3,
+      "rondasGanadas": 6,
+      "rondasPerdidas": 11,
       "activos": true,
       "rango": "B",
       "discordUsername": ".onirinku."
@@ -109,12 +109,12 @@
       "nombre": "AkumaKen",
       "avatarUrl": "https://i.postimg.cc/QCJmZJQD/4x7o1te2i7o31.jpg",
       "discordUsername": "akumaken22",
-      "puntos": 6,
-      "jugados": 3,
-      "ganados": 0,
-      "perdidos": 0,
-      "rondasGanadas": 0,
-      "rondasPerdidas": 0,
+      "puntos": 10.01,
+      "jugados": 5,
+      "ganados": 1,
+      "perdidos": 1,
+      "rondasGanadas": 3,
+      "rondasPerdidas": 3,
       "activos": true,
       "rango": "B"
     },
@@ -145,9 +145,1050 @@
       "rondasPerdidas": 0,
       "activos": true,
       "rango": "C"
+    },
+    {
+      "id": "scibh7p",
+      "nombre": "Joseph",
+      "avatarUrl": "https://i.postimg.cc/13fGvQjs/aec81cb757fd3ccb2d9fc1c220731382-upscayl-2x-upscayl-standard-4x.png",
+      "discordUsername": "joseph6995",
+      "puntos": 1.2,
+      "jugados": 1,
+      "ganados": 0,
+      "perdidos": 1,
+      "rondasGanadas": 2,
+      "rondasPerdidas": 5,
+      "activos": true,
+      "rango": "B"
+    },
+    {
+      "id": "jq5dt4c",
+      "nombre": "Nariz$",
+      "avatarUrl": "https://i.postimg.cc/NGJ0QHQW/how-would-these-two-interact-v0-gxvn0ovzaosc1.png",
+      "discordUsername": "narizzzz",
+      "puntos": 4.68,
+      "jugados": 3,
+      "ganados": 1,
+      "perdidos": 2,
+      "rondasGanadas": 4,
+      "rondasPerdidas": 8,
+      "activos": true,
+      "rango": "D"
     }
   ],
   "allMatches": [
+    {
+      "id": "04q0vos",
+      "fechaISO": "2025-09-25T01:28:29.946Z",
+      "ftType": 3,
+      "jugador1Id": "435x8vs",
+      "jugador2Id": "16ikoek",
+      "marcador": "3-0",
+      "rondas": {
+        "j1": 3,
+        "j2": 0
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758756372953-8669",
+      "roundsData": [
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "dcz4497",
+      "fechaISO": "2025-09-25T01:28:05.608Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "23732el",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "23732el",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758756058505-6696",
+      "roundsData": [
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ryu",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ryu",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ryu",
+          "p2Char": "Ryu"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "qppb8bh",
+      "fechaISO": "2025-09-25T01:27:24.970Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "nv899ky",
+      "marcador": "3-0",
+      "rondas": {
+        "j1": 3,
+        "j2": 0
+      },
+      "ganadorId": "pwna4qg",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758755639470-4657",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ryu",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ryu",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ryu",
+          "p2Char": "Ryu"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "p41adns",
+      "fechaISO": "2025-09-25T01:26:23.506Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "16ikoek",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "16ikoek",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758755153493-4450",
+      "roundsData": [
+        {
+          "winnerId": "16ikoek",
+          "p1Char": "Yang",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "16ikoek",
+          "p1Char": "Yang",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "16ikoek",
+          "p1Char": "Yang",
+          "p2Char": "Ryu"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "ecigy7r",
+      "fechaISO": "2025-09-25T01:25:02.046Z",
+      "ftType": 3,
+      "jugador1Id": "vdqht9u",
+      "jugador2Id": "nv899ky",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 3.5100000000000002,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758754968754-6641",
+      "roundsData": [
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "ajvqzne",
+      "fechaISO": "2025-09-25T01:21:56.264Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "23732el",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "23732el",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758754652098-4729",
+      "roundsData": [
+        {
+          "winnerId": "23732el",
+          "p1Char": "Yang",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Yang",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Yang",
+          "p2Char": "Makoto"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "kpa40nv",
+      "fechaISO": "2025-09-25T01:21:04.887Z",
+      "ftType": 3,
+      "jugador1Id": "nv899ky",
+      "jugador2Id": "435x8vs",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758754274919-6161",
+      "roundsData": [
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "dhx1z6g",
+      "fechaISO": "2025-09-25T01:20:40.685Z",
+      "ftType": 3,
+      "jugador1Id": "vdqht9u",
+      "jugador2Id": "pwna4qg",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "pwna4qg",
+      "puntosGanador": 3.5100000000000002,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758754268809-5663",
+      "roundsData": [
+        {
+          "winnerId": "vdqht9u",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "tyrtqhs",
+      "fechaISO": "2025-09-25T01:16:55.028Z",
+      "ftType": 3,
+      "jugador1Id": "vdqht9u",
+      "jugador2Id": "jq5dt4c",
+      "marcador": "3-1",
+      "rondas": {
+        "j1": 3,
+        "j2": 1
+      },
+      "ganadorId": "vdqht9u",
+      "puntosGanador": 3.0100000000000002,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758751908792-4176",
+      "roundsData": [
+        {
+          "winnerId": "vdqht9u",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        },
+        {
+          "winnerId": "jq5dt4c",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        },
+        {
+          "winnerId": "vdqht9u",
+          "p1Char": "Makoto",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "vdqht9u",
+          "p1Char": "Makoto",
+          "p2Char": "Makoto"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "xw8sh22",
+      "fechaISO": "2025-09-25T01:15:16.950Z",
+      "ftType": 3,
+      "jugador1Id": "23732el",
+      "jugador2Id": "435x8vs",
+      "marcador": "2-3",
+      "rondas": {
+        "j1": 2,
+        "j2": 3
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 4.51,
+      "puntosPerdedor": 1.34,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758753514168-8782",
+      "roundsData": [
+        {
+          "winnerId": "23732el",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "gebftwm",
+      "fechaISO": "2025-09-25T01:14:31.144Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "nv899ky",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758753511976-7985",
+      "roundsData": [
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "k4fra3v",
+      "fechaISO": "2025-09-25T01:13:45.463Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "jq5dt4c",
+      "marcador": "3-0",
+      "rondas": {
+        "j1": 3,
+        "j2": 0
+      },
+      "ganadorId": "pwna4qg",
+      "puntosGanador": 3.0100000000000002,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758753167405-5439",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "10c98rh",
+      "fechaISO": "2025-09-25T01:12:30.032Z",
+      "ftType": 3,
+      "jugador1Id": "vdqht9u",
+      "jugador2Id": "435x8vs",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 3.5100000000000002,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758753171467-8538",
+      "roundsData": [
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "td38mkt",
+      "fechaISO": "2025-09-25T01:11:24.984Z",
+      "ftType": 3,
+      "jugador1Id": "nv899ky",
+      "jugador2Id": "23732el",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "23732el",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758752912780-8678",
+      "roundsData": [
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "aekcw15",
+      "fechaISO": "2025-09-25T01:10:30.952Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "435x8vs",
+      "marcador": "2-3",
+      "rondas": {
+        "j1": 2,
+        "j2": 3
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 1.34,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758752326065-9657",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Yang",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Yang",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Yang",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Yang",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Yang",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "nji6mys",
+      "fechaISO": "2025-09-25T01:07:24.185Z",
+      "ftType": 3,
+      "jugador1Id": "23732el",
+      "jugador2Id": "jex250n",
+      "marcador": "3-1",
+      "rondas": {
+        "j1": 3,
+        "j2": 1
+      },
+      "ganadorId": "23732el",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758752264757-2369",
+      "roundsData": [
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Hugo",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Hugo",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Hugo",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Hugo",
+          "p2Char": "Hugo"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "1s4uceg",
+      "fechaISO": "2025-09-25T01:06:35.304Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "23732el",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "23732el",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758751764718-4955",
+      "roundsData": [
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ken",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ken",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ken",
+          "p2Char": "Hugo"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "qyxm7yk",
+      "fechaISO": "2025-09-25T01:05:15.731Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "435x8vs",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758751263666-5721",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Ken",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Ken",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Ken",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "b3gn3e5",
+      "fechaISO": "2025-09-25T01:03:11.930Z",
+      "ftType": 3,
+      "jugador1Id": "nv899ky",
+      "jugador2Id": "23732el",
+      "marcador": "3-2",
+      "rondas": {
+        "j1": 3,
+        "j2": 2
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.51,
+      "puntosPerdedor": 1.34,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758751071167-5453",
+      "roundsData": [
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ibuki",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "78e3g8r",
+      "fechaISO": "2025-09-25T01:02:02.977Z",
+      "ftType": 3,
+      "jugador1Id": "jex250n",
+      "jugador2Id": "jq5dt4c",
+      "marcador": "2-3",
+      "rondas": {
+        "j1": 2,
+        "j2": 3
+      },
+      "ganadorId": "jq5dt4c",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 1.34,
+      "roundsData": [
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Hugo",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Hugo",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "jq5dt4c",
+          "p1Char": "Hugo",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "jq5dt4c",
+          "p1Char": "Hugo",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "jq5dt4c",
+          "p1Char": "Hugo",
+          "p2Char": "Chun-Li"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "lql9xz0",
+      "fechaISO": "2025-09-25T00:59:12.456Z",
+      "ftType": 3,
+      "jugador1Id": "435x8vs",
+      "jugador2Id": "nv899ky",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758750669019-5498",
+      "roundsData": [
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Dudley",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Dudley",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Dudley",
+          "p2Char": "Makoto"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "ruiah14",
+      "fechaISO": "2025-09-25T00:58:38.553Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "nv899ky",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758749579442-8491",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "c7yuk9h",
+      "fechaISO": "2025-09-25T00:04:24.249Z",
+      "ftType": 3,
+      "jugador1Id": "nv899ky",
+      "jugador2Id": "435x8vs",
+      "marcador": "3-1",
+      "rondas": {
+        "j1": 3,
+        "j2": 1
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758750669019-5498",
+      "roundsData": [
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "ydqydbi",
+      "fechaISO": "2025-09-25T00:03:20.633Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "nv899ky",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758749579442-8491",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "lz7u7h2",
+      "fechaISO": "2025-09-25T00:02:18.156Z",
+      "ftType": 5,
+      "jugador1Id": "nv899ky",
+      "jugador2Id": "jex250n",
+      "marcador": "5-3",
+      "rondas": {
+        "j1": 5,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 5,
+      "puntosPerdedor": 1.7999999999999998,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758748512180-1741",
+      "roundsData": [
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "zrqrqd3",
+      "fechaISO": "2025-09-25T00:01:20.312Z",
+      "ftType": 5,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "scibh7p",
+      "marcador": "5-2",
+      "rondas": {
+        "j1": 5,
+        "j2": 2
+      },
+      "ganadorId": "pwna4qg",
+      "puntosGanador": 5,
+      "puntosPerdedor": 1.2,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758747203773-9730",
+      "roundsData": [
+        {
+          "winnerId": "scibh7p",
+          "p1Char": "Ryu",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ryu",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "scibh7p",
+          "p1Char": "Ryu",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Alex"
+        }
+      ],
+      "type": "liga"
+    },
     {
       "id": "m9a9cgw",
       "fechaISO": "2025-09-23T03:29:10.758Z",
@@ -803,6 +1844,1019 @@
     }
   ],
   "ligaMatches": [
+    {
+      "id": "04q0vos",
+      "fechaISO": "2025-09-25T01:28:29.946Z",
+      "ftType": 3,
+      "jugador1Id": "435x8vs",
+      "jugador2Id": "16ikoek",
+      "marcador": "3-0",
+      "rondas": {
+        "j1": 3,
+        "j2": 0
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758756372953-8669",
+      "roundsData": [
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "dcz4497",
+      "fechaISO": "2025-09-25T01:28:05.608Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "23732el",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "23732el",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758756058505-6696",
+      "roundsData": [
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ryu",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ryu",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ryu",
+          "p2Char": "Ryu"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "qppb8bh",
+      "fechaISO": "2025-09-25T01:27:24.970Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "nv899ky",
+      "marcador": "3-0",
+      "rondas": {
+        "j1": 3,
+        "j2": 0
+      },
+      "ganadorId": "pwna4qg",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758755639470-4657",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ryu",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ryu",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ryu",
+          "p2Char": "Ryu"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "p41adns",
+      "fechaISO": "2025-09-25T01:26:23.506Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "16ikoek",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "16ikoek",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758755153493-4450",
+      "roundsData": [
+        {
+          "winnerId": "16ikoek",
+          "p1Char": "Yang",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "16ikoek",
+          "p1Char": "Yang",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "16ikoek",
+          "p1Char": "Yang",
+          "p2Char": "Ryu"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "ecigy7r",
+      "fechaISO": "2025-09-25T01:25:02.046Z",
+      "ftType": 3,
+      "jugador1Id": "vdqht9u",
+      "jugador2Id": "nv899ky",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 3.5100000000000002,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758754968754-6641",
+      "roundsData": [
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "ajvqzne",
+      "fechaISO": "2025-09-25T01:21:56.264Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "23732el",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "23732el",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758754652098-4729",
+      "roundsData": [
+        {
+          "winnerId": "23732el",
+          "p1Char": "Yang",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Yang",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Yang",
+          "p2Char": "Makoto"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "kpa40nv",
+      "fechaISO": "2025-09-25T01:21:04.887Z",
+      "ftType": 3,
+      "jugador1Id": "nv899ky",
+      "jugador2Id": "435x8vs",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758754274919-6161",
+      "roundsData": [
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "dhx1z6g",
+      "fechaISO": "2025-09-25T01:20:40.685Z",
+      "ftType": 3,
+      "jugador1Id": "vdqht9u",
+      "jugador2Id": "pwna4qg",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "pwna4qg",
+      "puntosGanador": 3.5100000000000002,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758754268809-5663",
+      "roundsData": [
+        {
+          "winnerId": "vdqht9u",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "tyrtqhs",
+      "fechaISO": "2025-09-25T01:16:55.028Z",
+      "ftType": 3,
+      "jugador1Id": "vdqht9u",
+      "jugador2Id": "jq5dt4c",
+      "marcador": "3-1",
+      "rondas": {
+        "j1": 3,
+        "j2": 1
+      },
+      "ganadorId": "vdqht9u",
+      "puntosGanador": 3.0100000000000002,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758751908792-4176",
+      "roundsData": [
+        {
+          "winnerId": "vdqht9u",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        },
+        {
+          "winnerId": "jq5dt4c",
+          "p1Char": "Makoto",
+          "p2Char": "Yang"
+        },
+        {
+          "winnerId": "vdqht9u",
+          "p1Char": "Makoto",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "vdqht9u",
+          "p1Char": "Makoto",
+          "p2Char": "Makoto"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "xw8sh22",
+      "fechaISO": "2025-09-25T01:15:16.950Z",
+      "ftType": 3,
+      "jugador1Id": "23732el",
+      "jugador2Id": "435x8vs",
+      "marcador": "2-3",
+      "rondas": {
+        "j1": 2,
+        "j2": 3
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 4.51,
+      "puntosPerdedor": 1.34,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758753514168-8782",
+      "roundsData": [
+        {
+          "winnerId": "23732el",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "gebftwm",
+      "fechaISO": "2025-09-25T01:14:31.144Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "nv899ky",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758753511976-7985",
+      "roundsData": [
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "k4fra3v",
+      "fechaISO": "2025-09-25T01:13:45.463Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "jq5dt4c",
+      "marcador": "3-0",
+      "rondas": {
+        "j1": 3,
+        "j2": 0
+      },
+      "ganadorId": "pwna4qg",
+      "puntosGanador": 3.0100000000000002,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758753167405-5439",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Yang",
+          "p2Char": "Chun-Li"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "10c98rh",
+      "fechaISO": "2025-09-25T01:12:30.032Z",
+      "ftType": 3,
+      "jugador1Id": "vdqht9u",
+      "jugador2Id": "435x8vs",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 3.5100000000000002,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758753171467-8538",
+      "roundsData": [
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "td38mkt",
+      "fechaISO": "2025-09-25T01:11:24.984Z",
+      "ftType": 3,
+      "jugador1Id": "nv899ky",
+      "jugador2Id": "23732el",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "23732el",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758752912780-8678",
+      "roundsData": [
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "aekcw15",
+      "fechaISO": "2025-09-25T01:10:30.952Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "435x8vs",
+      "marcador": "2-3",
+      "rondas": {
+        "j1": 2,
+        "j2": 3
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 1.34,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758752326065-9657",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Yang",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Yang",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Yang",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Yang",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Yang",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "nji6mys",
+      "fechaISO": "2025-09-25T01:07:24.185Z",
+      "ftType": 3,
+      "jugador1Id": "23732el",
+      "jugador2Id": "jex250n",
+      "marcador": "3-1",
+      "rondas": {
+        "j1": 3,
+        "j2": 1
+      },
+      "ganadorId": "23732el",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758752264757-2369",
+      "roundsData": [
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Hugo",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Hugo",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Hugo",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Hugo",
+          "p2Char": "Hugo"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "1s4uceg",
+      "fechaISO": "2025-09-25T01:06:35.304Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "23732el",
+      "marcador": "0-3",
+      "rondas": {
+        "j1": 0,
+        "j2": 3
+      },
+      "ganadorId": "23732el",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758751764718-4955",
+      "roundsData": [
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ken",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ken",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ken",
+          "p2Char": "Hugo"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "qyxm7yk",
+      "fechaISO": "2025-09-25T01:05:15.731Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "435x8vs",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "435x8vs",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758751263666-5721",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Ken",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Ken",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Ken",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "b3gn3e5",
+      "fechaISO": "2025-09-25T01:03:11.930Z",
+      "ftType": 3,
+      "jugador1Id": "nv899ky",
+      "jugador2Id": "23732el",
+      "marcador": "3-2",
+      "rondas": {
+        "j1": 3,
+        "j2": 2
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.51,
+      "puntosPerdedor": 1.34,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758751071167-5453",
+      "roundsData": [
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ibuki",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "23732el",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ibuki",
+          "p2Char": "Ryu"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "78e3g8r",
+      "fechaISO": "2025-09-25T01:02:02.977Z",
+      "ftType": 3,
+      "jugador1Id": "jex250n",
+      "jugador2Id": "jq5dt4c",
+      "marcador": "2-3",
+      "rondas": {
+        "j1": 2,
+        "j2": 3
+      },
+      "ganadorId": "jq5dt4c",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 1.34,
+      "roundsData": [
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Hugo",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Hugo",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "jq5dt4c",
+          "p1Char": "Hugo",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "jq5dt4c",
+          "p1Char": "Hugo",
+          "p2Char": "Chun-Li"
+        },
+        {
+          "winnerId": "jq5dt4c",
+          "p1Char": "Hugo",
+          "p2Char": "Chun-Li"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "lql9xz0",
+      "fechaISO": "2025-09-25T00:59:12.456Z",
+      "ftType": 3,
+      "jugador1Id": "435x8vs",
+      "jugador2Id": "nv899ky",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758750669019-5498",
+      "roundsData": [
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Dudley",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Dudley",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Dudley",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Dudley",
+          "p2Char": "Makoto"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "ruiah14",
+      "fechaISO": "2025-09-25T00:58:38.553Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "nv899ky",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758749579442-8491",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "c7yuk9h",
+      "fechaISO": "2025-09-25T00:04:24.249Z",
+      "ftType": 3,
+      "jugador1Id": "nv899ky",
+      "jugador2Id": "435x8vs",
+      "marcador": "3-1",
+      "rondas": {
+        "j1": 3,
+        "j2": 1
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758750669019-5498",
+      "roundsData": [
+        {
+          "winnerId": "435x8vs",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Dudley"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "ydqydbi",
+      "fechaISO": "2025-09-25T00:03:20.633Z",
+      "ftType": 3,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "nv899ky",
+      "marcador": "1-3",
+      "rondas": {
+        "j1": 1,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 4.01,
+      "puntosPerdedor": 0.67,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758749579442-8491",
+      "roundsData": [
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Ken",
+          "p2Char": "Makoto"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "lz7u7h2",
+      "fechaISO": "2025-09-25T00:02:18.156Z",
+      "ftType": 5,
+      "jugador1Id": "nv899ky",
+      "jugador2Id": "jex250n",
+      "marcador": "5-3",
+      "rondas": {
+        "j1": 5,
+        "j2": 3
+      },
+      "ganadorId": "nv899ky",
+      "puntosGanador": 5,
+      "puntosPerdedor": 1.7999999999999998,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758748512180-1741",
+      "roundsData": [
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "jex250n",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        },
+        {
+          "winnerId": "nv899ky",
+          "p1Char": "Makoto",
+          "p2Char": "Hugo"
+        }
+      ],
+      "type": "liga"
+    },
+    {
+      "id": "zrqrqd3",
+      "fechaISO": "2025-09-25T00:01:20.312Z",
+      "ftType": 5,
+      "jugador1Id": "pwna4qg",
+      "jugador2Id": "scibh7p",
+      "marcador": "5-2",
+      "rondas": {
+        "j1": 5,
+        "j2": 2
+      },
+      "ganadorId": "pwna4qg",
+      "puntosGanador": 5,
+      "puntosPerdedor": 1.2,
+      "nota": "https://replay.fightcade.com/fbneo/sfiii3nr1/1758747203773-9730",
+      "roundsData": [
+        {
+          "winnerId": "scibh7p",
+          "p1Char": "Ryu",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ryu",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "scibh7p",
+          "p1Char": "Ryu",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Urien"
+        },
+        {
+          "winnerId": "pwna4qg",
+          "p1Char": "Ken",
+          "p2Char": "Alex"
+        }
+      ],
+      "type": "liga"
+    },
     {
       "id": "g4w9cdu",
       "fechaISO": "2025-09-23T03:30:37.167Z",
